@@ -60,8 +60,9 @@ extension VariableType {
     // Analyzes the string to match an appropriate VariableType
     init(string: String) {
         let s = string.lowercased()
-        let tests = [{s.contains("number")}]
-        
+        let variablesForNumbersThatShouldBeStrings = ["line_number", "phone_number"]
+        let tests = [{ s.contains("number") && variablesForNumbersThatShouldBeStrings.filter(s.contains).isEmpty }]
+
         for t in tests where t() {
             self = .numeric
             return
