@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.10"
   
   s.source_files  = "Sources/"
+  s.exclude_files = [ 'Sources/main.swift' ]
   s.public_header_files = "Sources/POEditorParser.h"
   s.preserve_paths = [ "bin/poe" ]
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }

@@ -3,10 +3,10 @@ import Foundation
 extension String {
     func replacingRegexMatches(of pattern: String, with replacing: String) throws -> String {
         let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
-        let range = NSMakeRange(0, self.count)
+        let range = NSRange(location: 0, length: self.count)
         return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacing)
     }
-    
+
     var unescaped: String {
         let entities = ["\0", "\t", "\n", "\r", "\"", "\'", "\\"]
         var current = self

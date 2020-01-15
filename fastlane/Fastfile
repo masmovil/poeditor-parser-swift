@@ -1,0 +1,10 @@
+default_platform(:mac)
+
+platform :mac do
+    desc 'Validate by building the project'
+    lane :validate_pr do |options|
+        Dir.chdir('..') do
+            sh "xcodebuild -scheme MM-PoEditor-Parser clean build -destination 'platform=OS X,arch=x86_64' | xcpretty -f `xcpretty-travis-formatter`"
+        end
+    end
+end

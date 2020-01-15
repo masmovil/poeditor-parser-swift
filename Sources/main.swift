@@ -14,7 +14,7 @@ let main = command(
 ) { (token: String, id: Int, language: String, swiftfile: String, stringsfile: String) in
 
     print("Fetching contents of strings at POEditor...".blue)
-    
+
     do {
         let json = try CURLRequest("\(POEditorAPIURL)/projects/export", .failOnError,
                                    .postField(.init(name: "api_token", value: token)),
@@ -23,7 +23,7 @@ let main = command(
                                    .postField(.init(name: "type", value: "apple_strings")))
             .perform()
             .bodyJSON
-            
+
         print("Querying POEditor for the latest strings file...".magenta)
 
         if let result = json["result"] as? [String: Any], let url = result["url"] as? String {
@@ -32,7 +32,7 @@ let main = command(
             let translationString = try CURLRequest(url, .failOnError)
                 .perform()
                 .bodyString
-            
+
             print("Successfully downloaded the latest strings file from POEditor!".green)
             print("Checking for changes in the downloaded strings file...".blue)
 
@@ -54,7 +54,7 @@ let main = command(
             print("Parsing strings file...".blue)
             let parser = StringTranslationParser(translation: translationString)
             let translations = parser.parse()
-            
+
             FileManager.default.createFile(atPath: swiftfile, contents: nil, attributes: nil)
             guard let swiftHandle = FileHandle(forWritingAtPath: swiftfile) else {
                 print("Fatal error: Couldn't write to file located at \(swiftfile)".red)
@@ -63,7 +63,7 @@ let main = command(
             let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle)
             fileCodeGenerator.generateCode(translations: translations)
             print("Success! Literals generated at \(swiftfile)".green)
-            
+
             FileManager.default.createFile(atPath: stringsfile, contents: nil, attributes: nil)
             guard let stringsHandle = FileHandle(forWritingAtPath: stringsfile) else {
                 print("Fatal error: Couldn't write to file located at \(stringsfile)".red)
