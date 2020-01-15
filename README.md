@@ -5,10 +5,10 @@ A simple generator of swift files from a given localized POeditor `strings` file
 [![Release Date](https://img.shields.io/github/release-date/bq/poeditor-parser-swift.svg)](https://github.com/bq/poeditor-parser-swift/releases)
 [![Pod](https://img.shields.io/cocoapods/v/POEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/POEditor-Parser)
 [![Platform](https://img.shields.io/cocoapods/p/POEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/POEditor-Parser)
-[![GitHub](https://img.shields.io/github/license/bq/poeditor-parser-swift.svg)](https://github.com/bq/poeditor-parser-swift/blob/master/LICENSE)
+[![GitHub](https://img.shields.io/github/license/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/blob/master/LICENSE)
 
-[![Build Status](https://travis-ci.org/bq/poeditor-parser-swift.svg?branch=master)](https://travis-ci.org/bq/poeditor-parser-swift)
-[![codecov](https://codecov.io/gh/bq/poeditor-parser-swift/branch/master/graph/badge.svg)](https://codecov.io/gh/bq/poeditor-parser-swift)
+[![Build Status](https://travis-ci.com/masmovil/poeditor-parser-swift.svg?branch=master)](https://travis-ci.com/masmovil/poeditor-parser-swift)
+[![codecov](https://codecov.io/gh/masmovil/poeditor-parser-swift/branch/master/graph/badge.svg)](https://codecov.io/gh/masmovil/poeditor-parser-swift)
 
 ## Usage
 
@@ -32,4 +32,4 @@ A simple generator of swift files from a given localized POeditor `strings` file
 POEditor-Parser is available under the Apache 2.0. See the LICENSE file for more info.  
   
 ## Android alternative
-If you want a similar solution for your Android projects, check this out: [poeditor-android-gradle-plugin](https://github.com/bq/poeditor-android-gradle-plugin)
+If you want a similar solution for your Android projects, check this out: [poeditor-android-gradle-plugin](https://github.com/masmovil/poeditor-android-gradle-plugin)
