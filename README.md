@@ -1,10 +1,10 @@
 # POEditor-Parser
 A simple generator of swift files from a given localized POeditor `strings` file.
 
-[![Release Version](https://img.shields.io/github/release/bq/poeditor-parser-swift.svg)](https://github.com/bq/poeditor-parser-swift/releases) 
-[![Release Date](https://img.shields.io/github/release-date/bq/poeditor-parser-swift.svg)](https://github.com/bq/poeditor-parser-swift/releases)
-[![Pod](https://img.shields.io/cocoapods/v/POEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/POEditor-Parser)
-[![Platform](https://img.shields.io/cocoapods/p/POEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/POEditor-Parser)
+[![Release Version](https://img.shields.io/github/release/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/releases) 
+[![Release Date](https://img.shields.io/github/release-date/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/releases)
+[![Pod](https://img.shields.io/cocoapods/v/MM-PoEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/MM-PoEditor-Parser)
+[![Platform](https://img.shields.io/cocoapods/p/MM-PoEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/MM-PoEditor-Parser)
 [![GitHub](https://img.shields.io/github/license/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/blob/master/LICENSE)
 
 [![Build Status](https://travis-ci.com/masmovil/poeditor-parser-swift.svg?branch=master)](https://travis-ci.com/masmovil/poeditor-parser-swift)
