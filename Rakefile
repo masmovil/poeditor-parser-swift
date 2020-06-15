@@ -5,7 +5,7 @@ task(:setup) do
   raise '`brew` is required. Please install brew. https://brew.sh/' unless system('which brew')
 
   puts('➡️  Bundle')
-  sh('brew bundle')
+  sh('brew install swiftlint')
   sh('bundle install')
 
   puts('➡️  Overcommit')
