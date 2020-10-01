@@ -10,6 +10,19 @@ A simple generator of swift files from a given localized POeditor `strings` file
 [![Build Status](https://travis-ci.com/masmovil/poeditor-parser-swift.svg?branch=master)](https://travis-ci.com/masmovil/poeditor-parser-swift)
 [![codecov](https://codecov.io/gh/masmovil/poeditor-parser-swift/branch/master/graph/badge.svg)](https://codecov.io/gh/masmovil/poeditor-parser-swift)
 
+## Installation
+
+POEditor-Parser is available through [CocoaPods](https://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage). 
+
+To install it, simply add the following line to your `Podfile`:
+```ruby
+pod 'POEditor-Parser'
+```
+or this into your `Cartfile`:
+```ogdl
+github "masmovil/poeditor-parser-swift" 
+```
+
 ## Usage
 
 ```ogdl
