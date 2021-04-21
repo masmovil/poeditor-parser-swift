@@ -1,7 +1,7 @@
 import Foundation
 
 enum TranslationValueParser {
-    static func parseTranslationValue(translationValue: String) -> (localizedDescription: String, variables: [Variable]) {
+    static func parseTranslationValue(translationValue: String) throws -> (localizedDescription: String, variables: [Variable]) {
         let str = Scanner(string: translationValue)
         str.charactersToBeSkipped = nil
 
@@ -49,6 +49,9 @@ enum TranslationValueParser {
                 //unordered var
             }
 
+            if str.isAtEnd {
+                throw AppError.misspelledTerm(term: translationValue)
+            }
             str.scanLocation += 1
 
             var variableName: NSString?
@@ -59,6 +62,9 @@ enum TranslationValueParser {
             localizedString += variable.type.localizedRepresentation
             variables.append((order: Int(intOut), variable: variable))
 
+            if str.scanLocation + 2 > translationValue.count {
+                throw AppError.misspelledTerm(term: translationValue)
+            }
             str.scanLocation += 2 // Advance the '}}'
         }
 
