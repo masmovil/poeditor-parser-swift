@@ -14,10 +14,11 @@
 		F2586ACB2497BB41006CAF4E /* TranslationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2586ACA2497BB41006CAF4E /* TranslationParser.swift */; };
 		F2586ACD2497BB72006CAF4E /* TranslationValueParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2586ACC2497BB72006CAF4E /* TranslationValueParser.swift */; };
 		F2586ACF2497BC6A006CAF4E /* StringsFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2586ACE2497BC6A006CAF4E /* StringsFileGenerator.swift */; };
+		F294D11226306C4F0048EFB0 /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = F294D11126306C4F0048EFB0 /* Program.swift */; };
+		F294D11526309A7A0048EFB0 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F294D11426309A7A0048EFB0 /* AppError.swift */; };
 		F2BA5FED23CE36B000ACB2BA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BA5FEC23CE36B000ACB2BA /* main.swift */; };
 		F2BA5FF723CE3C1100ACB2BA /* Commander in Frameworks */ = {isa = PBXBuildFile; productRef = F2BA5FF623CE3C1100ACB2BA /* Commander */; };
 		F2BA5FFA23CE3C3300ACB2BA /* Rainbow in Frameworks */ = {isa = PBXBuildFile; productRef = F2BA5FF923CE3C3300ACB2BA /* Rainbow */; };
-		F2BA5FFD23CE3CD600ACB2BA /* PerfectCURL in Frameworks */ = {isa = PBXBuildFile; productRef = F2BA5FFC23CE3CD600ACB2BA /* PerfectCURL */; };
 		F2BA600023CE3D0500ACB2BA /* SwiftCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BA5FFF23CE3D0500ACB2BA /* SwiftCodeGenerator.swift */; };
 		F2BA600223CE3D1100ACB2BA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BA600123CE3D1000ACB2BA /* StreamReader.swift */; };
 		F2BA600423CE3D2000ACB2BA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BA600323CE3D2000ACB2BA /* Extensions.swift */; };
@@ -43,6 +44,8 @@
 		F2586ACA2497BB41006CAF4E /* TranslationParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationParser.swift; sourceTree = "<group>"; };
 		F2586ACC2497BB72006CAF4E /* TranslationValueParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationValueParser.swift; sourceTree = "<group>"; };
 		F2586ACE2497BC6A006CAF4E /* StringsFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsFileGenerator.swift; sourceTree = "<group>"; };
+		F294D11126306C4F0048EFB0 /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
+		F294D11426309A7A0048EFB0 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		F2BA5FE923CE36B000ACB2BA /* poe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = poe; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BA5FEC23CE36B000ACB2BA /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F2BA5FF423CE3B8700ACB2BA /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
@@ -57,7 +60,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2BA5FF723CE3C1100ACB2BA /* Commander in Frameworks */,
-				F2BA5FFD23CE3CD600ACB2BA /* PerfectCURL in Frameworks */,
 				F2BA5FFA23CE3C3300ACB2BA /* Rainbow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +96,7 @@
 		F2BA5FFE23CE3CF900ACB2BA /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				F294D11426309A7A0048EFB0 /* AppError.swift */,
 				F2586AC62497BAAA006CAF4E /* Translation.swift */,
 				F2586ACC2497BB72006CAF4E /* TranslationValueParser.swift */,
 				F2586AC22497BA35006CAF4E /* Variable.swift */,
@@ -104,6 +107,7 @@
 				F2BA600123CE3D1000ACB2BA /* StreamReader.swift */,
 				F2586AC82497BAD8006CAF4E /* Constants.swift */,
 				F2BA600323CE3D2000ACB2BA /* Extensions.swift */,
+				F294D11126306C4F0048EFB0 /* Program.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -129,7 +133,6 @@
 			packageProductDependencies = (
 				F2BA5FF623CE3C1100ACB2BA /* Commander */,
 				F2BA5FF923CE3C3300ACB2BA /* Rainbow */,
-				F2BA5FFC23CE3CD600ACB2BA /* PerfectCURL */,
 			);
 			productName = "MM-PoEditor-Parser";
 			productReference = F2BA5FE923CE36B000ACB2BA /* poe */;
@@ -162,7 +165,6 @@
 			packageReferences = (
 				F2BA5FF523CE3C1100ACB2BA /* XCRemoteSwiftPackageReference "Commander" */,
 				F2BA5FF823CE3C3300ACB2BA /* XCRemoteSwiftPackageReference "Rainbow" */,
-				F2BA5FFB23CE3CD600ACB2BA /* XCRemoteSwiftPackageReference "Perfect-CURL" */,
 			);
 			productRefGroup = F2BA5FEA23CE36B000ACB2BA /* Products */;
 			projectDirPath = "";
@@ -221,10 +223,12 @@
 				F2BA600223CE3D1100ACB2BA /* StreamReader.swift in Sources */,
 				F2586ACB2497BB41006CAF4E /* TranslationParser.swift in Sources */,
 				F2BA600423CE3D2000ACB2BA /* Extensions.swift in Sources */,
+				F294D11526309A7A0048EFB0 /* AppError.swift in Sources */,
 				F2586ACF2497BC6A006CAF4E /* StringsFileGenerator.swift in Sources */,
 				F2BA600023CE3D0500ACB2BA /* SwiftCodeGenerator.swift in Sources */,
 				F2586AC52497BA66006CAF4E /* VariableType.swift in Sources */,
 				F2586AC72497BAAA006CAF4E /* Translation.swift in Sources */,
+				F294D11226306C4F0048EFB0 /* Program.swift in Sources */,
 				F2BA5FED23CE36B000ACB2BA /* main.swift in Sources */,
 				F2586ACD2497BB72006CAF4E /* TranslationValueParser.swift in Sources */,
 				F2586AC32497BA35006CAF4E /* Variable.swift in Sources */,
@@ -407,14 +411,6 @@
 				minimumVersion = 3.1.5;
 			};
 		};
-		F2BA5FFB23CE3CD600ACB2BA /* XCRemoteSwiftPackageReference "Perfect-CURL" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PerfectlySoft/Perfect-CURL";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -427,11 +423,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F2BA5FF823CE3C3300ACB2BA /* XCRemoteSwiftPackageReference "Rainbow" */;
 			productName = Rainbow;
-		};
-		F2BA5FFC23CE3CD600ACB2BA /* PerfectCURL */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F2BA5FFB23CE3CD600ACB2BA /* XCRemoteSwiftPackageReference "Perfect-CURL" */;
-			productName = PerfectCURL;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

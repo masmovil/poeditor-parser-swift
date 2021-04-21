@@ -1,7 +1,7 @@
 import Foundation
 
 protocol TranslationParser {
-    func parse() -> [Translation]
+    func parse() throws -> [Translation]
 }
 
 public class StringTranslationParser: TranslationParser {
@@ -11,7 +11,7 @@ public class StringTranslationParser: TranslationParser {
         self.translation = translation
     }
 
-    public func parse() -> [Translation] {
+    public func parse() throws -> [Translation] {
         var translations = [Translation]()
 
         let str = Scanner(string: translation)
@@ -49,7 +49,7 @@ public class StringTranslationParser: TranslationParser {
                     finalValue = value.substring(to: value.length) as NSString
                 }
 
-                translations.append(Translation(rawKey: key! as String, rawValue: finalValue as String? ?? ""))
+                translations.append(try Translation(rawKey: key! as String, rawValue: finalValue as String? ?? ""))
 
             }
             if str.isAtEnd {

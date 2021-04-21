@@ -8,12 +8,12 @@ public struct Translation {
     let localizedValue: String
     let variables: [Variable]
 
-    init(rawKey: String, rawValue: String) {
+    init(rawKey: String, rawValue: String) throws {
         self.rawKey = rawKey
         self.rawValue = rawValue
 
         // Parse translationValue
-        (localizedValue, variables) = TranslationValueParser.parseTranslationValue(translationValue: rawValue)
+        (localizedValue, variables) = try TranslationValueParser.parseTranslationValue(translationValue: rawValue)
     }
 
     private var prettyKey: String {

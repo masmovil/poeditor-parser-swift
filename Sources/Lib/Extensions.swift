@@ -1,5 +1,34 @@
 import Foundation
 
+extension URLSession {
+    func syncDataTask(with request: URLRequest) throws -> Data {
+        var data: Data?
+        var response: URLResponse?
+        var error: Error?
+
+        let semaphore = DispatchSemaphore(value: 0)
+
+        let dataTask = self.dataTask(with: request) {
+            data = $0
+            response = $1
+            error = $2
+
+            semaphore.signal()
+        }
+        dataTask.resume()
+
+        _ = semaphore.wait(timeout: .distantFuture)
+
+        if let error = error {
+            throw error
+        }
+        if let data = data, let _ = response {
+            return data
+        }
+        throw NSError.init(domain: "WTF", code: 69, userInfo: nil)
+    }
+}
+
 extension String {
     func replacingRegexMatches(of pattern: String, with replacing: String) throws -> String {
         let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
