@@ -38,7 +38,7 @@ public struct Translation {
          return NSLocalizedString()
          }
          */
-        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\"\(rawKey)\", comment: \"\")\n\t}\n"
+        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(keys.\(prettyKey), comment: \"\")\n\t}\n"
     }
 
     private func generateVariableSwiftCode() -> String {
