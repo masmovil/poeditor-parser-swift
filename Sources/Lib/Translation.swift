@@ -29,7 +29,7 @@ public struct Translation {
     }
 
     var swiftKey: String {
-        return "\tstatic let \(prettyKey) = \"\(rawKey)\"\n"
+        return "\tpublic static let \(prettyKey) = \"\(rawKey)\"\n\tpublic let \(prettyKey) = \"\(rawKey)\"\n"
     }
 
     private func generateVariableLessSwiftCode() -> String {
@@ -38,7 +38,7 @@ public struct Translation {
          return NSLocalizedString()
          }
          */
-        return "\tstatic var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\"\(rawKey)\", comment: \"\")\n\t}\n"
+        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\"\(rawKey)\", comment: \"\")\n\t}\n"
     }
 
     private func generateVariableSwiftCode() -> String {
@@ -54,6 +54,6 @@ public struct Translation {
             .map { $0.parameterKey }
             .map { $0.snakeCased() }
             .joined(separator: ", ")
-        return "\tstatic func \(prettyKey)(\(parameters)) -> String {\n\t\treturn String(format: \(localizedStringFunction)(\"\(rawKey)\", comment: \"\"), \(localizedArguments))\n\t}\n"
+        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn String(format: \(localizedStringFunction)(keys.\(prettyKey), comment: \"\"), \(localizedArguments))\n\t}\n"
     }
 }

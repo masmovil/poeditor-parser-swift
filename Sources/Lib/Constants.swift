@@ -21,9 +21,9 @@ enum POEConstants {
 
     """
 
-    static let literalsObjectHeader = "class Literals {\n"
-    static let literalsObjectFooter = "}\n"
-    static let literalsKeysObjectHeader = "class LiteralsKeys {\n"
+    static let literalsObjectHeader = "public class Literals {\n"
+    static let literalsObjectFooter = "\n\tpublic static let keys = LiteralsKeys()\n}\n"
+    static let literalsKeysObjectHeader = "public class LiteralsKeys {\n"
     static let literalsKeysObjectFooter = "}\n"
 
     static let fileFooter = "\n//swiftlint:enable all\n"
