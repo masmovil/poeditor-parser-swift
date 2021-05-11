@@ -46,7 +46,7 @@ enum TranslationValueParser {
             if intScanned {
                 // ordered var
             } else {
-                //unordered var
+                // unordered var
             }
 
             if str.isAtEnd {

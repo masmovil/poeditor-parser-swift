@@ -14,5 +14,3 @@ let main: Never = command(
     let program = Program()
     try program.run(token: token, id: id, language: language, swiftfile: swiftfile, stringsfile: stringsfile)
 }.run()
-
-

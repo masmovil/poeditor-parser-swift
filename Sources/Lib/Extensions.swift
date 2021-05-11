@@ -25,7 +25,7 @@ extension URLSession {
         if let data = data, let _ = response {
             return data
         }
-        throw NSError.init(domain: "WTF", code: 69, userInfo: nil)
+        throw NSError(domain: "WTF", code: 69, userInfo: nil)
     }
 }
 

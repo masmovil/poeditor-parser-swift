@@ -23,7 +23,7 @@ class Program {
                 throw AppError.apiCouldNotFetchDownloadUrlError
             }
             print("✅ Successfully got the latest URL for the strings file from POEditor".green)
-            
+
             print("🔄 Downloading the latest strings file from POEditor...".magenta)
             let downloadRequest = URLRequest(url: url)
             let downloadData = try URLSession.shared.syncDataTask(with: downloadRequest)

@@ -5,7 +5,7 @@ public enum AppError: Error, LocalizedError {
     case writeFileError(file: String)
     case apiDownloadTermsError
     case apiCouldNotFetchDownloadUrlError
-    
+
     public var errorDescription: String? {
         switch self {
         case .misspelledTerm(let term):
