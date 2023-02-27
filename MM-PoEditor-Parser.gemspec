@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "MM-PoEditor-Parser"
-  spec.version       = "1.5.2"
+  spec.version       = "1.5.3"
   spec.authors       = ["MásMóvil"]
   spec.email         = ["info@grupomasmovil.com"]
 
@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = Dir["bin/poe"] + ["README.md", "LICENSE"]
   spec.executables   = ["poe"]
+  spec.bindir        = 'bin'
 
   spec.require_paths = ["bin"]
 end
