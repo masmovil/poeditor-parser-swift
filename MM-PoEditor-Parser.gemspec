@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "MM-PoEditor-Parser"
-  spec.version       = Fastlane::MmToolkit::VERSION
+  spec.version       = "1.5.1"
   spec.authors       = ["MásMóvil"]
   spec.email         = ["info@grupomasmovil.com"]
 
