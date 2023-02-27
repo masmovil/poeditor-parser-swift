@@ -3,7 +3,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "MM-PoEditor-Parser"
-  spec.version       = "1.5.1"
+  spec.version       = "1.5.2"
   spec.authors       = ["MásMóvil"]
   spec.email         = ["info@grupomasmovil.com"]
 
@@ -11,6 +11,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/masmovil/fastlane-plugin-mm_toolkit"
   spec.license       = "Apache-2.0"
 
-  spec.files         = Dir["bin/*"] + ["README.md", "LICENSE"]
+  spec.files         = Dir["bin/poe"] + ["README.md", "LICENSE"]
+  spec.executables   = ["poe"]
+
   spec.require_paths = ["bin"]
 end
