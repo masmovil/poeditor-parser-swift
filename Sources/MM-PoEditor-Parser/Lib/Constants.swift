@@ -21,7 +21,7 @@ enum POEConstants {
 
     """
 
-    static let version = "1.6.0"
+    static let version = "1.7.0"
     
     static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
     static func literalsStructFooter(keysName: String) -> String { "\n\tpublic static let keys = \(keysName)()\n}\n" }
