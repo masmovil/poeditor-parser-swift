@@ -17,7 +17,8 @@ public struct Translation {
     }
 
     private var prettyKey: String {
-        return rawKey.capitalized.replacingOccurrences(of: "_", with: "")
+        return (rawKey.prefix(1).lowercased() + rawKey.capitalized.dropFirst())
+            .replacingOccurrences(of: "_", with: "")
     }
 
     var swiftCode: String {

@@ -1,8 +1,21 @@
 import Foundation
 
 class Program {
-    func run(token: String, id: Int, language: String, swiftfile: String, stringsfile: String) throws {
+    func run(token: String,
+             id: Int,
+             language: String,
+             swiftfile: String,
+             stringsfile: String,
+             structname: String,
+             structkeysname: String,
+             onlyKeys: Bool) throws {
         do {
+            print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
+            print("-  Generating Swift: \(swiftfile)".white)
+            print("-  Generating .strings: \(stringsfile)".white)
+            print("-  Struct name: \(structname)".white)
+            print("-  StructKeys name: \(structkeysname)".white)
+            print("-  Only Keys: \(onlyKeys)".white)
             print("ℹ️  Fetching contents of strings at POEditor...".blue)
             print("🔄 Querying POEditor for the latest strings file...".magenta)
             var request = URLRequest(url: URL(string: "\(POEditorAPIURL)/projects/export")!)
@@ -40,7 +53,10 @@ class Program {
             guard let swiftHandle = FileHandle(forWritingAtPath: swiftfile) else {
                 throw AppError.writeFileError(file: swiftfile)
             }
-            let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle)
+            let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle,
+                                                      structname: structname,
+                                                      structkeysname: structkeysname,
+                                                      onlyKeys: onlyKeys)
             fileCodeGenerator.generateCode(translations: translations)
             print("✅ Success! Literals generated at \(swiftfile)".green)
 

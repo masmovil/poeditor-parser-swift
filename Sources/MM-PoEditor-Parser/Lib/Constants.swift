@@ -21,10 +21,12 @@ enum POEConstants {
 
     """
 
-    static let literalsObjectHeader = "public class Literals {\n"
-    static let literalsObjectFooter = "\n\tpublic static let keys = LiteralsKeys()\n}\n"
-    static let literalsKeysObjectHeader = "public class LiteralsKeys {\n"
-    static let literalsKeysObjectFooter = "}\n"
+    static let version = "1.6.0"
+    
+    static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
+    static func literalsStructFooter(keysName: String) -> String { "\n\tpublic static let keys = \(keysName)()\n}\n" }
+    static func literalsKeysStructHeader(keysName: String) -> String { "public struct \(keysName) {\n" }
+    static let literalsKeysStructFooter = "}\n"
 
     static let fileFooter = "\n//swiftlint:enable all\n"
 
