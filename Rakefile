@@ -16,3 +16,8 @@ task(:setup) do
   puts('➡️  SPM Resolve Dependencies')
   sh('xcodebuild -resolvePackageDependencies')
 end
+
+task :package do
+  sh("xcrun swift build -c release --arch arm64 --arch x86_64")
+  sh("cp ./.build/apple/Products/Release/poe ./bin/")
+end
