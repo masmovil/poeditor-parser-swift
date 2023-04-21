@@ -4,17 +4,17 @@ class Program {
     func run(token: String,
              id: Int,
              language: String,
-             swiftfile: String,
-             stringsfile: String,
-             structname: String,
+             swiftFile: String,
+             stringsFile: String,
+             structName: String,
              keysName: String,
              keysFormat: KeysFormat,
              onlyKeys: Bool) throws {
         do {
             print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
-            print("-  Generating Swift: \(swiftfile)".white)
-            print("-  Generating .strings: \(stringsfile)".white)
-            print("-  Struct name: \(structname)".white)
+            print("-  Generating Swift: \(swiftFile)".white)
+            print("-  Generating .strings: \(stringsFile)".white)
+            print("-  Struct name: \(structName)".white)
             print("-  Keys name: \(keysName)".white)
             print("-  Keys format: \(keysFormat)".white)
             print("-  Only Keys: \(onlyKeys)".white)
@@ -53,24 +53,24 @@ class Program {
                                                  keysFormat: keysFormat)
             let translations = try parser.parse()
 
-            FileManager.default.createFile(atPath: swiftfile, contents: nil, attributes: nil)
-            guard let swiftHandle = FileHandle(forWritingAtPath: swiftfile) else {
-                throw AppError.writeFileError(file: swiftfile)
+            FileManager.default.createFile(atPath: swiftFile, contents: nil, attributes: nil)
+            guard let swiftHandle = FileHandle(forWritingAtPath: swiftFile) else {
+                throw AppError.writeFileError(file: swiftFile)
             }
             let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle,
-                                                      structname: structname,
+                                                      structname: structName,
                                                       keysName: keysName,
                                                       onlyKeys: onlyKeys)
             fileCodeGenerator.generateCode(translations: translations)
-            print("✅ Success! Literals generated at \(swiftfile)".green)
+            print("✅ Success! Literals generated at \(swiftFile)".green)
 
-            FileManager.default.createFile(atPath: stringsfile, contents: nil, attributes: nil)
-            guard let stringsHandle = FileHandle(forWritingAtPath: stringsfile) else {
-                throw AppError.writeFileError(file: stringsfile)
+            FileManager.default.createFile(atPath: stringsFile, contents: nil, attributes: nil)
+            guard let stringsHandle = FileHandle(forWritingAtPath: stringsFile) else {
+                throw AppError.writeFileError(file: stringsFile)
             }
             let stringsFileGenerator = StringsFileGenerator(fileHandle: stringsHandle)
             stringsFileGenerator.generateCode(translations: translations)
-            print("✅ Success! Strings generated at \(stringsfile)".green)
+            print("✅ Success! Strings generated at \(stringsFile)".green)
 
         } catch let error {
             print("❌ [ERROR] \(error.localizedDescription)".red)
