@@ -4,16 +4,14 @@ let localizedStringFunction = "NSLocalizedString"
 public struct Translation {
     let rawKey: String
     let rawValue: String
-    let keysName: String
     let keysFormat: KeysFormat
 
     let localizedValue: String
     let variables: [Variable]
 
-    init(rawKey: String, rawValue: String, keysName: String, keysFormat: KeysFormat) throws {
+    init(rawKey: String, rawValue: String, keysFormat: KeysFormat) throws {
         self.rawKey = rawKey
         self.rawValue = rawValue
-        self.keysName = keysName
         self.keysFormat = keysFormat
 
         // Parse translationValue
@@ -33,26 +31,37 @@ public struct Translation {
 
     var swiftCode: String {
         if variables.isEmpty {
-            return generateVariableLessSwiftCode()
+            return generateFuncWithouVariables()
         } else {
-            return generateVariableSwiftCode()
+            return generateFuncWithVariables()
         }
     }
 
-    var swiftKey: String {
-        return "\tcase \(prettyKey) = \"\(rawKey)\""
+    var swiftKeyCase: String {
+        if variables.isEmpty {
+            return "\tcase \(prettyKey)"
+        }
+        let parameters = variables
+            .map { $0.type.swiftParameter(key: $0.parameterKey) }
+            .joined(separator: ", ")
+
+        return "\tcase \(prettyKey)(\(parameters))"
+    }
+    
+    var swiftKeyValue: String {
+        return "\t\tcase .\(prettyKey): return \"\(rawKey)\""
     }
 
-    private func generateVariableLessSwiftCode() -> String {
+    private func generateFuncWithouVariables() -> String {
         /*
          static var Welcome: String {
          return NSLocalizedString()
          }
          */
-        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\(keysName).\(prettyKey).rawValue, comment: \"\")\n\t}\n"
+        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\"\(rawKey)\", comment: \"\")\n\t}\n"
     }
 
-    private func generateVariableSwiftCode() -> String {
+    private func generateFuncWithVariables() -> String {
         /*
          static func ReadBooksKey(readNumber: Int) -> String {
          return ""
@@ -62,9 +71,15 @@ public struct Translation {
             .map { $0.type.swiftParameter(key: $0.parameterKey) }
             .joined(separator: ", ")
         let localizedArguments = variables
-            .map { $0.parameterKey }
-            .map { $0.snakeCased() }
-            .joined(separator: ", ")
-        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn String(format: \(localizedStringFunction)(\(keysName).\(prettyKey).rawValue, comment: \"\"), \(localizedArguments))\n\t}\n"
+            .map { variable in
+                if variable.type != .textual {
+                    let value = "String(format: \"\(variable.type.localizedRepresentation)\", \(variable.parameterKey.snakeCased()))"
+                    return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(value))"
+                }
+                
+                return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
+            }
+            .joined(separator: "\n\t\t\t")
+        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn \(localizedStringFunction)(\"\(rawKey)\", comment: \"\")\n\t\t\t\(localizedArguments)\n\t}\n"
     }
 }

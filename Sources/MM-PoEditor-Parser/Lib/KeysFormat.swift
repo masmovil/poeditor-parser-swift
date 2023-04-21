@@ -2,6 +2,9 @@ import Foundation
 import Commander
 
 public enum KeysFormat: String, ArgumentConvertible {
+    case lowerCamelCase
+    case upperCamelCase
+    
     public init(parser: Commander.ArgumentParser) throws {
         guard let value = parser.shift() else {
             throw ArgumentError.missingValue(argument: nil)
@@ -23,7 +26,4 @@ public enum KeysFormat: String, ArgumentConvertible {
             return "Upper Camel Case"
         }
     }
-    
-    case lowerCamelCase
-    case upperCamelCase
 }

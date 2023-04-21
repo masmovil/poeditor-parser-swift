@@ -1,4 +1,24 @@
 import Foundation
+import Commander
+
+extension Bool: ArgumentConvertible {
+    public init(parser: ArgumentParser) throws {
+        guard let value = parser.shift() else {
+            throw ArgumentError.missingValue(argument: nil)
+        }
+
+        switch value.lowercased() {
+        case "true", "yes", "si", "1":
+            self = true
+        
+        case "false", "no", "0":
+            self = false
+            
+        default:
+            throw ArgumentError.invalidType(value: value, type: "boolean", argument: nil)
+        }
+    }
+}
 
 extension URLSession {
     func syncDataTask(with request: URLRequest) throws -> Data {

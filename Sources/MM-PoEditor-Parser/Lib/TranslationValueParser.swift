@@ -59,7 +59,7 @@ enum TranslationValueParser {
 
             // AssociateOrder if ordered
             let variable = Variable(rawKey: variableName! as String)
-            localizedString += variable.type.localizedRepresentation
+            localizedString += "{{" + variable.parameterKey + "}}"
             variables.append((order: Int(intOut), variable: variable))
 
             if str.scanLocation + 2 > translationValue.count {

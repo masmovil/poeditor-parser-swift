@@ -7,12 +7,10 @@ protocol TranslationParser {
 public class StringTranslationParser: TranslationParser {
 
     let translation: String
-    let keysName: String
     let keysFormat: KeysFormat
 
-    public init(translation: String, keysName: String, keysFormat: KeysFormat) {
+    public init(translation: String, keysFormat: KeysFormat) {
         self.translation = translation
-        self.keysName = keysName
         self.keysFormat = keysFormat
     }
 
@@ -56,7 +54,6 @@ public class StringTranslationParser: TranslationParser {
 
                 translations.append(try Translation(rawKey: key! as String,
                                                     rawValue: finalValue as String? ?? "",
-                                                    keysName: keysName,
                                                     keysFormat: keysFormat))
 
             }

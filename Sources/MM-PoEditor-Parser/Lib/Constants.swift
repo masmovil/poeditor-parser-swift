@@ -24,8 +24,10 @@ enum POEConstants {
     static let version = "1.7.3"
     
     static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
-    static func literalsStructFooter(keysName: String) -> String { "}\n" }
-    static func literalsKeysHeader(keysName: String) -> String { "public enum \(keysName): String, CaseIterable {\n" }
+    static let literalsStructFooter = "}\n"
+    static func literalsKeysHeader(keysName: String) -> String { "public enum \(keysName) {\n" }
+    static let literalsKeysComputedKeyStart = "\tvar i18nKey: String {\n\t\tswitch(self) {\n"
+    static let literalsKeysComputedKeyEnd = "\n\t\t}\n\t}"
     static let literalsKeysFooter = "\n}\n"
 
     static let fileFooter = "\n//swiftlint:enable all\n"

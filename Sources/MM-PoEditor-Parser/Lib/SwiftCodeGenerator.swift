@@ -6,32 +6,42 @@ public protocol SwiftCodeGenerator {
 
 public class StringCodeGenerator: SwiftCodeGenerator {
     var generatedResult = ""
-    let structname: String
-    let keysName: String
+    let typeName: String
+    let outputFormat: OutputFormat
     
-    public init(structname: String, keysName: String) {
-        self.structname = structname
-        self.keysName = keysName
+    public init(typeName: String, outputFormat: OutputFormat) {
+        self.typeName = typeName
+        self.outputFormat = outputFormat
     }
     
     public func generateCode(translations: [Translation]) {
         generatedResult += POEConstants.fileHeader
 
-        generatedResult += POEConstants.literalsStructHeader(name: structname)
-        for (index, translation) in translations.enumerated() {
-            generatedResult += translation.swiftCode
-            if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
+        switch outputFormat {
+        case .structure:
+            generatedResult += POEConstants.literalsStructHeader(name: typeName)
+            for (index, translation) in translations.enumerated() {
+                generatedResult += translation.swiftCode
+                if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
+            }
+            generatedResult += POEConstants.literalsStructFooter
+            
+        case .enumerated:
+            generatedResult += POEConstants.literalsKeysHeader(keysName: typeName)
+            for (index, translation) in translations.enumerated() {
+                generatedResult += translation.swiftKeyCase
+                if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
+            }
+            generatedResult += POEConstants.methodOrVariableSeparator
+            generatedResult += POEConstants.methodOrVariableSeparator
+            generatedResult += POEConstants.literalsKeysComputedKeyStart
+            for (index, translation) in translations.enumerated() {
+                generatedResult += translation.swiftKeyValue
+                if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
+            }
+            generatedResult += POEConstants.literalsKeysComputedKeyEnd
+            generatedResult += POEConstants.literalsKeysFooter
         }
-        generatedResult += POEConstants.literalsStructFooter(keysName: keysName)
-
-        generatedResult += POEConstants.methodOrVariableSeparator
-
-        generatedResult += POEConstants.literalsKeysHeader(keysName: keysName)
-        for (index, translation) in translations.enumerated() {
-            generatedResult += translation.swiftKey
-            if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
-        }
-        generatedResult += POEConstants.literalsKeysFooter
 
         generatedResult += POEConstants.fileFooter
     }
@@ -39,37 +49,43 @@ public class StringCodeGenerator: SwiftCodeGenerator {
 
 public class FileCodeGenerator: SwiftCodeGenerator {
     let fileHandle: FileHandle
-    let structname: String
-    let keysName: String
-    let onlyKeys: Bool
+    let typeName: String
+    let outputFormat: OutputFormat
 
-    public init(fileHandle: FileHandle, structname: String, keysName: String, onlyKeys: Bool) {
+    public init(fileHandle: FileHandle, typeName: String, outputFormat: OutputFormat) {
         self.fileHandle = fileHandle
-        self.structname = structname
-        self.keysName = keysName
-        self.onlyKeys = onlyKeys
+        self.typeName = typeName
+        self.outputFormat = outputFormat
     }
 
     public func generateCode(translations: [Translation]) {
         fileHandle += POEConstants.fileHeader
 
-        if !onlyKeys {
-            fileHandle += POEConstants.literalsStructHeader(name: structname)
+        switch outputFormat {
+        case .structure:
+            fileHandle += POEConstants.literalsStructHeader(name: typeName)
             for (index, translation) in translations.enumerated() {
                 fileHandle += translation.swiftCode
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
-            fileHandle += POEConstants.literalsStructFooter(keysName: keysName)
+            fileHandle += POEConstants.literalsStructFooter
+            
+        case .enumerated:
+            fileHandle += POEConstants.literalsKeysHeader(keysName: typeName)
+            for (index, translation) in translations.enumerated() {
+                fileHandle += translation.swiftKeyCase
+                if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
+            }
+            fileHandle += POEConstants.methodOrVariableSeparator
+            fileHandle += POEConstants.methodOrVariableSeparator
+            fileHandle += POEConstants.literalsKeysComputedKeyStart
+            for (index, translation) in translations.enumerated() {
+                fileHandle += translation.swiftKeyValue
+                if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
+            }
+            fileHandle += POEConstants.literalsKeysComputedKeyEnd
+            fileHandle += POEConstants.literalsKeysFooter
         }
-
-        fileHandle += POEConstants.methodOrVariableSeparator
-
-        fileHandle += POEConstants.literalsKeysHeader(keysName: keysName)
-        for (index, translation) in translations.enumerated() {
-            fileHandle += translation.swiftKey
-            if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
-        }
-        fileHandle += POEConstants.literalsKeysFooter
 
         fileHandle += POEConstants.fileFooter
 

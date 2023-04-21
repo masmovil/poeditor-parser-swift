@@ -6,18 +6,16 @@ class Program {
              language: String,
              swiftFile: String,
              stringsFile: String,
-             structName: String,
-             keysName: String,
-             keysFormat: KeysFormat,
-             onlyKeys: Bool) throws {
+             typeName: String,
+             outputFormat: OutputFormat,
+             keysFormat: KeysFormat) throws {
         do {
             print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
             print("-  Generating Swift: \(swiftFile)".white)
             print("-  Generating .strings: \(stringsFile)".white)
-            print("-  Struct name: \(structName)".white)
-            print("-  Keys name: \(keysName)".white)
+            print("-  Type name: \(typeName)".white)
+            print("-  Output format: \(outputFormat)".white)
             print("-  Keys format: \(keysFormat)".white)
-            print("-  Only Keys: \(onlyKeys)".white)
             print("ℹ️  Fetching contents of strings at POEditor...".blue)
             print("🔄 Querying POEditor for the latest strings file...".magenta)
             var request = URLRequest(url: URL(string: "\(POEditorAPIURL)/projects/export")!)
@@ -49,7 +47,6 @@ class Program {
 
             print("ℹ️  Parsing strings file...".blue)
             let parser = StringTranslationParser(translation: translationString,
-                                                 keysName: keysName,
                                                  keysFormat: keysFormat)
             let translations = try parser.parse()
 
@@ -58,9 +55,8 @@ class Program {
                 throw AppError.writeFileError(file: swiftFile)
             }
             let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle,
-                                                      structname: structName,
-                                                      keysName: keysName,
-                                                      onlyKeys: onlyKeys)
+                                                      typeName: typeName,
+                                                      outputFormat: outputFormat)
             fileCodeGenerator.generateCode(translations: translations)
             print("✅ Success! Literals generated at \(swiftFile)".green)
 
