@@ -7,11 +7,11 @@ public protocol SwiftCodeGenerator {
 public class StringCodeGenerator: SwiftCodeGenerator {
     var generatedResult = ""
     let structname: String
-    let structkeysname: String
+    let keysName: String
     
-    public init(structname: String, structkeysname: String) {
+    public init(structname: String, keysName: String) {
         self.structname = structname
-        self.structkeysname = structkeysname
+        self.keysName = keysName
     }
     
     public func generateCode(translations: [Translation]) {
@@ -22,16 +22,16 @@ public class StringCodeGenerator: SwiftCodeGenerator {
             generatedResult += translation.swiftCode
             if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
         }
-        generatedResult += POEConstants.literalsStructFooter(keysName: structkeysname)
+        generatedResult += POEConstants.literalsStructFooter(keysName: keysName)
 
         generatedResult += POEConstants.methodOrVariableSeparator
 
-        generatedResult += POEConstants.literalsKeysStructHeader(keysName: structkeysname)
+        generatedResult += POEConstants.literalsKeysHeader(keysName: keysName)
         for (index, translation) in translations.enumerated() {
             generatedResult += translation.swiftKey
             if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
         }
-        generatedResult += POEConstants.literalsKeysStructFooter
+        generatedResult += POEConstants.literalsKeysFooter
 
         generatedResult += POEConstants.fileFooter
     }
@@ -40,13 +40,13 @@ public class StringCodeGenerator: SwiftCodeGenerator {
 public class FileCodeGenerator: SwiftCodeGenerator {
     let fileHandle: FileHandle
     let structname: String
-    let structkeysname: String
+    let keysName: String
     let onlyKeys: Bool
 
-    public init(fileHandle: FileHandle, structname: String, structkeysname: String, onlyKeys: Bool) {
+    public init(fileHandle: FileHandle, structname: String, keysName: String, onlyKeys: Bool) {
         self.fileHandle = fileHandle
         self.structname = structname
-        self.structkeysname = structkeysname
+        self.keysName = keysName
         self.onlyKeys = onlyKeys
     }
 
@@ -59,17 +59,17 @@ public class FileCodeGenerator: SwiftCodeGenerator {
                 fileHandle += translation.swiftCode
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
-            fileHandle += POEConstants.literalsStructFooter(keysName: structkeysname)
+            fileHandle += POEConstants.literalsStructFooter(keysName: keysName)
         }
 
         fileHandle += POEConstants.methodOrVariableSeparator
 
-        fileHandle += POEConstants.literalsKeysStructHeader(keysName: structkeysname)
+        fileHandle += POEConstants.literalsKeysHeader(keysName: keysName)
         for (index, translation) in translations.enumerated() {
             fileHandle += translation.swiftKey
             if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
         }
-        fileHandle += POEConstants.literalsKeysStructFooter
+        fileHandle += POEConstants.literalsKeysFooter
 
         fileHandle += POEConstants.fileFooter
 

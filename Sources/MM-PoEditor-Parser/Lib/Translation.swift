@@ -4,21 +4,31 @@ let localizedStringFunction = "NSLocalizedString"
 public struct Translation {
     let rawKey: String
     let rawValue: String
+    let keysName: String
+    let keysFormat: KeysFormat
 
     let localizedValue: String
     let variables: [Variable]
 
-    init(rawKey: String, rawValue: String) throws {
+    init(rawKey: String, rawValue: String, keysName: String, keysFormat: KeysFormat) throws {
         self.rawKey = rawKey
         self.rawValue = rawValue
+        self.keysName = keysName
+        self.keysFormat = keysFormat
 
         // Parse translationValue
         (localizedValue, variables) = try TranslationValueParser.parseTranslationValue(translationValue: rawValue)
     }
 
     private var prettyKey: String {
-        return (rawKey.prefix(1).lowercased() + rawKey.capitalized.dropFirst())
-            .replacingOccurrences(of: "_", with: "")
+        switch keysFormat {
+        case .upperCamelCase:
+            return rawKey.capitalized.replacingOccurrences(of: "_", with: "")
+            
+        case .lowerCamelCase:
+            return (rawKey.prefix(1).lowercased() + rawKey.capitalized.dropFirst())
+                .replacingOccurrences(of: "_", with: "")
+        }
     }
 
     var swiftCode: String {
@@ -30,7 +40,7 @@ public struct Translation {
     }
 
     var swiftKey: String {
-        return "\tpublic static let \(prettyKey) = \"\(rawKey)\"\n\tpublic let \(prettyKey) = \"\(rawKey)\"\n"
+        return "\tcase \(prettyKey) = \"\(rawKey)\""
     }
 
     private func generateVariableLessSwiftCode() -> String {
@@ -39,7 +49,7 @@ public struct Translation {
          return NSLocalizedString()
          }
          */
-        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(keys.\(prettyKey), comment: \"\")\n\t}\n"
+        return "\tpublic static var \(prettyKey): String {\n\t\treturn \(localizedStringFunction)(\(keysName).\(prettyKey).rawValue, comment: \"\")\n\t}\n"
     }
 
     private func generateVariableSwiftCode() -> String {
@@ -55,6 +65,6 @@ public struct Translation {
             .map { $0.parameterKey }
             .map { $0.snakeCased() }
             .joined(separator: ", ")
-        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn String(format: \(localizedStringFunction)(keys.\(prettyKey), comment: \"\"), \(localizedArguments))\n\t}\n"
+        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn String(format: \(localizedStringFunction)(\(keysName).\(prettyKey).rawValue, comment: \"\"), \(localizedArguments))\n\t}\n"
     }
 }

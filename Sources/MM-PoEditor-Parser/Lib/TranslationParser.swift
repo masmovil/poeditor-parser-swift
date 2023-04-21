@@ -7,8 +7,13 @@ protocol TranslationParser {
 public class StringTranslationParser: TranslationParser {
 
     let translation: String
-    public init(translation: String) {
+    let keysName: String
+    let keysFormat: KeysFormat
+
+    public init(translation: String, keysName: String, keysFormat: KeysFormat) {
         self.translation = translation
+        self.keysName = keysName
+        self.keysFormat = keysFormat
     }
 
     public func parse() throws -> [Translation] {
@@ -49,7 +54,10 @@ public class StringTranslationParser: TranslationParser {
                     finalValue = value.substring(to: value.length) as NSString
                 }
 
-                translations.append(try Translation(rawKey: key! as String, rawValue: finalValue as String? ?? ""))
+                translations.append(try Translation(rawKey: key! as String,
+                                                    rawValue: finalValue as String? ?? "",
+                                                    keysName: keysName,
+                                                    keysFormat: keysFormat))
 
             }
             if str.isAtEnd {

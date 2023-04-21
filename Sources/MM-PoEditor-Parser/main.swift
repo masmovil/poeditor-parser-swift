@@ -11,7 +11,8 @@ command(
     Option<String>("swiftfile", default: "Sources/Literals.swift", description: "The output Swift file directory."),
     Option<String>("stringsfile", default: "Sources/Localizable.strings", description: "The output Strings file directory."),
     Option<String>("structname", default: "Literals", description: "The struct name for localized vars"),
-    Option<String>("structkeysname", default: "LiteralsKeys", description: "The struct name for localized keys"),
+    Option<String>("keysName", default: "LiteralsKeys", description: "The enum with all localized keys values"),
+    Option<KeysFormat>("keysFormat", default: .upperCamelCase, description: "The format for the localized key"),
     Option<Bool>("onlyKeys", default: false, description: "Indicate that only generate keys (without localized vars)")
 ) { (token: String,
      id: Int,
@@ -19,7 +20,8 @@ command(
      swiftfile: String,
      stringsfile: String,
      structname: String,
-     structkeysname: String,
+     keysName: String,
+     keysFormat: KeysFormat,
      onlyKeys: Bool) in
     
     let program = Program()
@@ -29,7 +31,8 @@ command(
                     swiftfile: swiftfile,
                     stringsfile: stringsfile,
                     structname: structname,
-                    structkeysname: structkeysname,
+                    keysName: keysName,
+                    keysFormat: keysFormat,
                     onlyKeys: onlyKeys)
     
 }.run()
