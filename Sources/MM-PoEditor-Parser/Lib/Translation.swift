@@ -67,7 +67,7 @@ public struct Translation: Comparable {
     }
 
     private func generateEnumCaseWithoutVariables() -> String {
-        return "\t\tcase .\(prettyKey): return rawValue"
+        return "\t\tcase .\(prettyKey): return value"
     }
     
     private func generateEnumCaseWithVariables() -> String {
@@ -84,7 +84,7 @@ public struct Translation: Comparable {
                 return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
             }
             .joined(separator: "\n\t\t\t")
-        return "\t\tcase .\(prettyKey)(\(parameters)): return rawValue\n\t\t\t\(localizedArguments)"
+        return "\t\tcase .\(prettyKey)(\(parameters)): return value\n\t\t\t\(localizedArguments)"
     }
     
     private func generateFuncWithoutVariables() -> String {
