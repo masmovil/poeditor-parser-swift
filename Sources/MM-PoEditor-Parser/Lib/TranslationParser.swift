@@ -52,7 +52,7 @@ public class StringTranslationParser: TranslationParser {
                     finalValue = value.substring(to: value.length) as NSString
                 }
 
-                translations.append(try Translation(rawKey: key! as String,
+                translations.append(try Translation(key: key! as String,
                                                     rawValue: finalValue as String? ?? "",
                                                     keysFormat: keysFormat))
 

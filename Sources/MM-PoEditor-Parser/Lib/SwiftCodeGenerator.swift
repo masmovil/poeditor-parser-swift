@@ -18,29 +18,40 @@ public class StringCodeGenerator: SwiftCodeGenerator {
         generatedResult += POEConstants.fileHeader
 
         switch outputFormat {
-        case .structure:
+        case .struct:
             generatedResult += POEConstants.literalsStructHeader(name: typeName)
             for (index, translation) in translations.enumerated() {
-                generatedResult += translation.swiftCode
+                generatedResult += translation.swiftStaticFuncCode
                 if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
             }
             generatedResult += POEConstants.literalsStructFooter
             
-        case .enumerated:
-            generatedResult += POEConstants.literalsKeysHeader(keysName: typeName)
+        case .enum:
+            generatedResult += POEConstants.literalsEnumHeader(keysName: typeName)
             for (index, translation) in translations.enumerated() {
-                generatedResult += translation.swiftKeyCase
+                generatedResult += translation.swiftEnumCaseCode
                 if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
             }
             generatedResult += POEConstants.methodOrVariableSeparator
             generatedResult += POEConstants.methodOrVariableSeparator
-            generatedResult += POEConstants.literalsKeysComputedKeyStart
+
+            generatedResult += POEConstants.literalsEnumValueFuncStart
             for (index, translation) in translations.enumerated() {
-                generatedResult += translation.swiftKeyValue
+                generatedResult += translation.swiftEnumCaseForValue
                 if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
             }
-            generatedResult += POEConstants.literalsKeysComputedKeyEnd
-            generatedResult += POEConstants.literalsKeysFooter
+            generatedResult += POEConstants.literalsEnumValueFuncEnd
+
+            generatedResult += POEConstants.methodOrVariableSeparator
+
+            generatedResult += POEConstants.literalsEnumStringKeyStart
+            for (index, translation) in translations.enumerated() {
+                generatedResult += translation.swiftEnumCaseForKey
+                if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
+            }
+            generatedResult += POEConstants.literalsEnumStringKeyEnd
+
+            generatedResult += POEConstants.literalsEnumFooter
         }
 
         generatedResult += POEConstants.fileFooter
@@ -62,29 +73,40 @@ public class FileCodeGenerator: SwiftCodeGenerator {
         fileHandle += POEConstants.fileHeader
 
         switch outputFormat {
-        case .structure:
+        case .struct:
             fileHandle += POEConstants.literalsStructHeader(name: typeName)
             for (index, translation) in translations.enumerated() {
-                fileHandle += translation.swiftCode
+                fileHandle += translation.swiftStaticFuncCode
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
             fileHandle += POEConstants.literalsStructFooter
             
-        case .enumerated:
-            fileHandle += POEConstants.literalsKeysHeader(keysName: typeName)
+        case .enum:
+            fileHandle += POEConstants.literalsEnumHeader(keysName: typeName)
             for (index, translation) in translations.enumerated() {
-                fileHandle += translation.swiftKeyCase
+                fileHandle += translation.swiftEnumCaseCode
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
             fileHandle += POEConstants.methodOrVariableSeparator
             fileHandle += POEConstants.methodOrVariableSeparator
-            fileHandle += POEConstants.literalsKeysComputedKeyStart
+            
+            fileHandle += POEConstants.literalsEnumValueFuncStart
             for (index, translation) in translations.enumerated() {
-                fileHandle += translation.swiftKeyValue
+                fileHandle += translation.swiftEnumCaseForValue
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
-            fileHandle += POEConstants.literalsKeysComputedKeyEnd
-            fileHandle += POEConstants.literalsKeysFooter
+            fileHandle += POEConstants.literalsEnumValueFuncEnd
+            
+            fileHandle += POEConstants.methodOrVariableSeparator
+
+            fileHandle += POEConstants.literalsEnumStringKeyStart
+            for (index, translation) in translations.enumerated() {
+                fileHandle += translation.swiftEnumCaseForKey
+                if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
+            }
+            fileHandle += POEConstants.literalsEnumStringKeyEnd
+            
+            fileHandle += POEConstants.literalsEnumFooter
         }
 
         fileHandle += POEConstants.fileFooter

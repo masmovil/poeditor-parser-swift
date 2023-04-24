@@ -48,7 +48,7 @@ class Program {
             print("ℹ️  Parsing strings file...".blue)
             let parser = StringTranslationParser(translation: translationString,
                                                  keysFormat: keysFormat)
-            let translations = try parser.parse()
+            let translations = try parser.parse().sorted()
 
             FileManager.default.createFile(atPath: swiftFile, contents: nil, attributes: nil)
             guard let swiftHandle = FileHandle(forWritingAtPath: swiftFile) else {

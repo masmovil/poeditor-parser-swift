@@ -9,7 +9,7 @@ public class StringsFileGenerator {
 
     public func generateCode(translations: [Translation]) {
         for translation in translations {
-            fileHandle += "\"\(translation.rawKey)\" = \"\(translation.localizedValue)\";\n"
+            fileHandle += "\"\(translation.key)\" = \"\(translation.value)\";\n"
         }
     }
 }

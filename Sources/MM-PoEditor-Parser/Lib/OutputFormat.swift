@@ -2,8 +2,8 @@ import Foundation
 import Commander
 
 public enum OutputFormat: String, ArgumentConvertible {
-    case enumerated
-    case structure
+    case `enum`
+    case `struct`
 
     public init(parser: Commander.ArgumentParser) throws {
         guard let value = parser.shift() else {
@@ -11,7 +11,7 @@ public enum OutputFormat: String, ArgumentConvertible {
         }
         
         guard let keysFormat = OutputFormat(rawValue: value) else {
-            throw ArgumentError.invalidType(value: value, type: "OutputFormat", argument: nil)
+            throw ArgumentError.invalidType(value: value, type: "output format", argument: nil)
         }
         
         self = keysFormat
@@ -19,11 +19,11 @@ public enum OutputFormat: String, ArgumentConvertible {
     
     public var description: String {
         switch self {
-        case .enumerated:
-            return "Enumerated"
+        case .enum:
+            return "Enum"
 
-        case .structure:
-            return "Structure"
+        case .struct:
+            return "Struct"
         }
     }
     

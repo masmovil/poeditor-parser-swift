@@ -11,7 +11,7 @@ public enum KeysFormat: String, ArgumentConvertible {
         }
         
         guard let keysFormat = KeysFormat(rawValue: value) else {
-            throw ArgumentError.invalidType(value: value, type: "KeysFormat", argument: nil)
+            throw ArgumentError.invalidType(value: value, type: "key format", argument: nil)
         }
         
         self = keysFormat
@@ -20,10 +20,10 @@ public enum KeysFormat: String, ArgumentConvertible {
     public var description: String {
         switch self {
         case .lowerCamelCase:
-            return "Lower Camel Case"
+            return "LowerCamelCase"
 
         case .upperCamelCase:
-            return "Upper Camel Case"
+            return "UpperCamelCase"
         }
     }
 }

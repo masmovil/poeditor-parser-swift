@@ -25,10 +25,12 @@ enum POEConstants {
     
     static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
     static let literalsStructFooter = "}\n"
-    static func literalsKeysHeader(keysName: String) -> String { "public enum \(keysName) {\n" }
-    static let literalsKeysComputedKeyStart = "\tvar i18nKey: String {\n\t\tswitch(self) {\n"
-    static let literalsKeysComputedKeyEnd = "\n\t\t}\n\t}"
-    static let literalsKeysFooter = "\n}\n"
+    static func literalsEnumHeader(keysName: String) -> String { "public enum \(keysName) {\n" }
+    static let literalsEnumStringKeyStart = "\tpublic var key: String {\n\t\tswitch(self) {\n"
+    static let literalsEnumStringKeyEnd = "\n\t\t}\n\t}\n"
+    static let literalsEnumValueFuncStart = "\tpublic func parsed(value: String) -> String {\n\t\tswitch(self) {\n"
+    static let literalsEnumValueFuncEnd = "\n\t\t}\n\t}\n"
+    static let literalsEnumFooter = "}\n"
 
     static let fileFooter = "\n//swiftlint:enable all\n"
 
