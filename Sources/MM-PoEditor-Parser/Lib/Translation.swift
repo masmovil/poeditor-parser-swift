@@ -13,7 +13,7 @@ public struct Translation: Comparable {
         self.keysFormat = keysFormat
 
         // Parse translationValue
-        (value, variables) = try TranslationValueParser.parseTranslationValue(translationValue: rawValue)
+        (value, variables) = try TranslationValueParser.parseTranslationValue(term: key, translationValue: rawValue)
     }
     
     public var hasVariables: Bool {

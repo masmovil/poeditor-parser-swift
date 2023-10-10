@@ -1,15 +1,15 @@
 import Foundation
 
 public enum AppError: Error, LocalizedError {
-    case misspelledTerm(term: String)
+    case misspelledTerm(term: String, translation: String)
     case writeFileError(file: String)
     case apiDownloadTermsError
     case apiCouldNotFetchDownloadUrlError
 
     public var errorDescription: String? {
         switch self {
-        case .misspelledTerm(let term):
-            return "Misspelled term: \(term)"
+        case .misspelledTerm(let key, let value):
+            return "Misspelled term: \(key) = \(value)"
         case .writeFileError(let file):
             return "Couldn't write to file located at: \(file)"
         case .apiDownloadTermsError:

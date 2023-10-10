@@ -11,7 +11,7 @@ enum POEConstants {
     }()
 
     static let fileHeader = """
-    // Generated using MM-POEditorParser
+    // Generated using MM-POEditorParser (\(version))
     // DO NOT EDIT
     // Generated: \(POEConstants.dateFormatter.string(from: Date()))
 
