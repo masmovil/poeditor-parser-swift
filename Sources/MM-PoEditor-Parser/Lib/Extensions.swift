@@ -10,10 +10,10 @@ extension Bool: ArgumentConvertible {
         switch value.lowercased() {
         case "true", "yes", "si", "1":
             self = true
-        
+
         case "false", "no", "0":
             self = false
-            
+
         default:
             throw ArgumentError.invalidType(value: value, type: "boolean", argument: nil)
         }

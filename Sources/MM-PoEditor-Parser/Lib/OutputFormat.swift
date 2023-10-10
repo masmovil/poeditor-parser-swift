@@ -9,14 +9,14 @@ public enum OutputFormat: String, ArgumentConvertible {
         guard let value = parser.shift() else {
             throw ArgumentError.missingValue(argument: nil)
         }
-        
+
         guard let keysFormat = OutputFormat(rawValue: value) else {
             throw ArgumentError.invalidType(value: value, type: "output format", argument: nil)
         }
-        
+
         self = keysFormat
     }
-    
+
     public var description: String {
         switch self {
         case .enum:
@@ -26,5 +26,5 @@ public enum OutputFormat: String, ArgumentConvertible {
             return "Struct"
         }
     }
-    
+
 }

@@ -15,11 +15,11 @@ public struct Translation: Comparable {
         // Parse translationValue
         (value, variables) = try TranslationValueParser.parseTranslationValue(term: key, translationValue: rawValue)
     }
-    
+
     public var hasVariables: Bool {
         !variables.isEmpty
     }
-    
+
     public var hasMoreThanOneVariable: Bool {
         variables.count > 1
     }
@@ -42,7 +42,7 @@ public struct Translation: Comparable {
 
         return "\tcase \(prettyKey)(\(parameters))"
     }
-    
+
     public var swiftEnumCaseForValue: String {
         if variables.isEmpty {
             return generateEnumCaseWithoutVariables()
@@ -50,16 +50,16 @@ public struct Translation: Comparable {
             return generateEnumCaseWithVariables()
         }
     }
-    
+
     public var swiftEnumCaseForKey: String {
         return "\t\tcase .\(prettyKey): return \"\(key)\""
     }
-    
+
     private var prettyKey: String {
         switch keysFormat {
         case .upperCamelCase:
             return key.capitalized.replacingOccurrences(of: "_", with: "")
-            
+
         case .lowerCamelCase:
             return (key.prefix(1).lowercased() + key.capitalized.dropFirst())
                 .replacingOccurrences(of: "_", with: "")
@@ -69,7 +69,7 @@ public struct Translation: Comparable {
     private func generateEnumCaseWithoutVariables() -> String {
         return "\t\tcase .\(prettyKey): return value"
     }
-    
+
     private func generateEnumCaseWithVariables() -> String {
         let parameters = variables
             .map { $0.type.swiftCaseParameter(key: $0.parameterKey) }
@@ -80,13 +80,13 @@ public struct Translation: Comparable {
                     let value = "String(format: \"\(variable.type.localizedRepresentation)\", \(variable.parameterKey.snakeCased()))"
                     return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(value))"
                 }
-                
+
                 return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
             }
             .joined(separator: "\n\t\t\t")
         return "\t\tcase .\(prettyKey)(\(parameters)): return value\n\t\t\t\(localizedArguments)"
     }
-    
+
     private func generateFuncWithoutVariables() -> String {
         /*
          static var Welcome: String {
@@ -111,17 +111,17 @@ public struct Translation: Comparable {
                     let value = "String(format: \"\(variable.type.localizedRepresentation)\", \(variable.parameterKey.snakeCased()))"
                     return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(value))"
                 }
-                
+
                 return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
             }
             .joined(separator: "\n\t\t\t")
         return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn NSLocalizedString(\"\(key)\", comment: \"\")\n\t\t\t\(localizedArguments)\n\t}\n"
     }
-    
+
     public static func < (lhs: Translation, rhs: Translation) -> Bool {
         lhs.prettyKey < rhs.prettyKey
     }
-    
+
     public static func == (lhs: Translation, rhs: Translation) -> Bool {
         lhs.prettyKey == rhs.prettyKey
     }

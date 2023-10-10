@@ -22,7 +22,7 @@ enum POEConstants {
     """
 
     static let version = "1.9.1"
-    
+
     static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
     static let literalsStructFooter = "}\n"
     static func literalsEnumHeader(keysName: String) -> String { "public enum \(keysName) {\n" }

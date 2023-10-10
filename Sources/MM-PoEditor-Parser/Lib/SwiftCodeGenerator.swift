@@ -8,12 +8,12 @@ public class StringCodeGenerator: SwiftCodeGenerator {
     var generatedResult = ""
     let typeName: String
     let outputFormat: OutputFormat
-    
+
     public init(typeName: String, outputFormat: OutputFormat) {
         self.typeName = typeName
         self.outputFormat = outputFormat
     }
-    
+
     public func generateCode(translations: [Translation]) {
         generatedResult += POEConstants.fileHeader
 
@@ -25,7 +25,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
                 if index < translations.count - 1 { generatedResult += POEConstants.methodOrVariableSeparator }
             }
             generatedResult += POEConstants.literalsStructFooter
-            
+
         case .enum:
             generatedResult += POEConstants.literalsEnumHeader(keysName: typeName)
             for (index, translation) in translations.enumerated() {
@@ -80,7 +80,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
             fileHandle += POEConstants.literalsStructFooter
-            
+
         case .enum:
             fileHandle += POEConstants.literalsEnumHeader(keysName: typeName)
             for (index, translation) in translations.enumerated() {
@@ -89,14 +89,14 @@ public class FileCodeGenerator: SwiftCodeGenerator {
             }
             fileHandle += POEConstants.methodOrVariableSeparator
             fileHandle += POEConstants.methodOrVariableSeparator
-            
+
             fileHandle += POEConstants.literalsEnumValueFuncStart
             for (index, translation) in translations.enumerated() {
                 fileHandle += translation.swiftEnumCaseForValue
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
             fileHandle += POEConstants.literalsEnumValueFuncEnd
-            
+
             fileHandle += POEConstants.methodOrVariableSeparator
 
             fileHandle += POEConstants.literalsEnumStringKeyStart
@@ -105,7 +105,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
                 if index < translations.count - 1 { fileHandle += POEConstants.methodOrVariableSeparator }
             }
             fileHandle += POEConstants.literalsEnumStringKeyEnd
-            
+
             fileHandle += POEConstants.literalsEnumFooter
         }
 

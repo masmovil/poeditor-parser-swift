@@ -21,7 +21,7 @@ command(
      typeName: String,
      outputFormat: OutputFormat,
      keysFormat: KeysFormat) in
-    
+
     let program = Program()
     try program.run(token: token,
                     id: id,
@@ -31,5 +31,5 @@ command(
                     typeName: typeName,
                     outputFormat: outputFormat,
                     keysFormat: keysFormat)
-    
+
 }.run()
