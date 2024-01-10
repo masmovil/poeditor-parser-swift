@@ -7,6 +7,7 @@ class Program {
              swiftFile: String,
              stringsFile: String,
              typeName: String,
+             tableName: String?,
              outputFormat: OutputFormat,
              keysFormat: KeysFormat) throws {
         do {
@@ -14,6 +15,7 @@ class Program {
             print("-  Generating Swift: \(swiftFile)".white)
             print("-  Generating .strings: \(stringsFile)".white)
             print("-  Type name: \(typeName)".white)
+            print("-  Table name: \(tableName ?? "NOT SET")".white)
             print("-  Output format: \(outputFormat)".white)
             print("-  Keys format: \(keysFormat)".white)
             print("ℹ️  Fetching contents of strings at POEditor...".blue)
@@ -47,7 +49,8 @@ class Program {
             print("✅ Successfully downloaded the latest strings file from POEditor!".green)
 
             print("ℹ️  Parsing strings file...".blue)
-            let parser = StringTranslationParser(translation: translationString,
+            let parser = StringTranslationParser(typeName: typeName,
+                                                 translation: translationString,
                                                  keysFormat: keysFormat)
             let translations = try parser.parse().sorted()
 
@@ -57,6 +60,7 @@ class Program {
             }
             let fileCodeGenerator = FileCodeGenerator(fileHandle: swiftHandle,
                                                       typeName: typeName,
+                                                      tableName: tableName,
                                                       outputFormat: outputFormat)
             fileCodeGenerator.generateCode(translations: translations)
             print("✅ Success! Literals generated at \(swiftFile)".green)

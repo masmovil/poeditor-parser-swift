@@ -11,6 +11,7 @@ command(
     Option<String>("swiftfile", default: "Sources/Literals.swift", description: "The output Swift file directory."),
     Option<String>("stringsfile", default: "Sources/Localizable.strings", description: "The output Strings file directory."),
     Option<String>("typename", default: "Literals", description: "The type name that store all localized vars"),
+    Option<String?>("tablename", default: nil, description: "The tableName value for NSLocalizedString"),
     Option<OutputFormat>("outputformat", default: .struct, description: "The output format for swift file (enum or struct)"),
     Option<KeysFormat>("keysformat", default: .upperCamelCase, description: "The format for the localized key")
 ) { (token: String,
@@ -19,6 +20,7 @@ command(
      swiftFile: String,
      stringsFile: String,
      typeName: String,
+     tableName: String?,
      outputFormat: OutputFormat,
      keysFormat: KeysFormat) in
 
@@ -28,7 +30,8 @@ command(
                     language: language,
                     swiftFile: swiftFile,
                     stringsFile: stringsFile,
-                    typeName: typeName,
+                    typeName: typeName, 
+                    tableName: tableName,
                     outputFormat: outputFormat,
                     keysFormat: keysFormat)
 

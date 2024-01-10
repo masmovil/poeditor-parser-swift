@@ -1,13 +1,15 @@
 import Foundation
 
 public struct Translation: Comparable {
+    public let typeName: String
     public let key: String
     public let value: String
     private let rawValue: String
     private let keysFormat: KeysFormat
     private let variables: [Variable]
 
-    public init(key: String, rawValue: String, keysFormat: KeysFormat) throws {
+    public init(typeName: String, key: String, rawValue: String, keysFormat: KeysFormat) throws {
+        self.typeName = typeName
         self.key = key
         self.rawValue = rawValue
         self.keysFormat = keysFormat
@@ -93,7 +95,7 @@ public struct Translation: Comparable {
          return NSLocalizedString()
          }
          */
-        return "\tpublic static var \(prettyKey): String {\n\t\treturn NSLocalizedString(\"\(key)\", comment: \"\")\n\t}\n"
+        return "\tpublic static var \(prettyKey): String {\n\t\treturn NSLocalizedString(\"\(key)\", tableName: \(typeName).tableName, comment: \"\")\n\t}\n"
     }
 
     private func generateFuncWithVariables() -> String {
@@ -115,7 +117,7 @@ public struct Translation: Comparable {
                 return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
             }
             .joined(separator: "\n\t\t\t")
-        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn NSLocalizedString(\"\(key)\", comment: \"\")\n\t\t\t\(localizedArguments)\n\t}\n"
+        return "\tpublic static func \(prettyKey)(\(parameters)) -> String {\n\t\treturn NSLocalizedString(\"\(key)\", tableName: \(typeName).tableName, comment: \"\")\n\t\t\t\(localizedArguments)\n\t}\n"
     }
 
     public static func < (lhs: Translation, rhs: Translation) -> Bool {

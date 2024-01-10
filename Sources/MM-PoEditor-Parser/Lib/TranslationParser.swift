@@ -6,10 +6,12 @@ protocol TranslationParser {
 
 public class StringTranslationParser: TranslationParser {
 
+    let typeName: String
     let translation: String
     let keysFormat: KeysFormat
 
-    public init(translation: String, keysFormat: KeysFormat) {
+    public init(typeName: String, translation: String, keysFormat: KeysFormat) {
+        self.typeName = typeName
         self.translation = translation
         self.keysFormat = keysFormat
     }
@@ -52,7 +54,8 @@ public class StringTranslationParser: TranslationParser {
                     finalValue = value.substring(to: value.length) as NSString
                 }
 
-                translations.append(try Translation(key: key! as String,
+                translations.append(try Translation(typeName: typeName,
+                                                    key: key! as String,
                                                     rawValue: finalValue as String? ?? "",
                                                     keysFormat: keysFormat))
 
