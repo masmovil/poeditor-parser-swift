@@ -4,7 +4,7 @@ public enum AppError: Error, LocalizedError {
     case misspelledTerm(term: String, translation: String)
     case writeFileError(file: String)
     case apiDownloadTermsError
-    case apiCouldNotFetchDownloadUrlError
+    case apiConnectError
 
     public var errorDescription: String? {
         switch self {
@@ -13,9 +13,9 @@ public enum AppError: Error, LocalizedError {
         case .writeFileError(let file):
             return "Couldn't write to file located at: \(file)"
         case .apiDownloadTermsError:
-            return "Could not download terms from API!"
-        case .apiCouldNotFetchDownloadUrlError:
-            return "Could not recover download url from API!"
+            return "Could not download terms from API: Check internet connection"
+        case .apiConnectError:
+            return "Could not connect to PoEditor API: Check Token or internet connection"
         }
     }
 }

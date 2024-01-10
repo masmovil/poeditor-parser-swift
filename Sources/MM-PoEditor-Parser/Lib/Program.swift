@@ -33,11 +33,12 @@ class Program {
                 let urlString = result["url"] as? String,
                 let url = URL(string: urlString)
             else {
-                throw AppError.apiCouldNotFetchDownloadUrlError
+                throw AppError.apiConnectError
             }
             print("✅ Successfully got the latest URL for the strings file from POEditor".green)
 
             print("🔄 Downloading the latest strings file from POEditor...".magenta)
+            print("URL: \(urlString)".lightWhite)
             let downloadRequest = URLRequest(url: url)
             let downloadData = try URLSession.shared.syncDataTask(with: downloadRequest)
             guard let translationString = NSString(data: downloadData, encoding: String.Encoding.utf8.rawValue) as String? else {
