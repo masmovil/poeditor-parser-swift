@@ -3,24 +3,16 @@ A simple generator of swift files from a given localized POeditor `strings` file
 
 [![Release Version](https://img.shields.io/github/release/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/releases) 
 [![Release Date](https://img.shields.io/github/release-date/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/releases)
-[![Pod](https://img.shields.io/cocoapods/v/MM-PoEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/MM-PoEditor-Parser)
-[![Platform](https://img.shields.io/cocoapods/p/MM-PoEditor-Parser.svg?style=flat)](https://cocoapods.org/pods/MM-PoEditor-Parser)
 [![GitHub](https://img.shields.io/github/license/masmovil/poeditor-parser-swift.svg)](https://github.com/masmovil/poeditor-parser-swift/blob/master/LICENSE)
-
-[![Build Status](https://travis-ci.com/masmovil/poeditor-parser-swift.svg?branch=master)](https://travis-ci.com/masmovil/poeditor-parser-swift)
 [![codecov](https://codecov.io/gh/masmovil/poeditor-parser-swift/branch/master/graph/badge.svg)](https://codecov.io/gh/masmovil/poeditor-parser-swift)
 
 ## Installation
 
-POEditor-Parser is available through [CocoaPods](https://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage). 
+POEditor-Parser is available through [Mint](https://github.com/yonaskolb/Mint)
 
-To install it, simply add the following line to your `Podfile`:
+To install it, simply add the following line to your `Mintfile`:
 ```ruby
-pod 'POEditor-Parser'
-```
-or this into your `Cartfile`:
-```ogdl
-github "masmovil/poeditor-parser-swift" 
+masmovil/poeditor-parser-swift@v2.0.1
 ```
 
 ## Usage
@@ -30,8 +22,18 @@ github "masmovil/poeditor-parser-swift"
 ```
 
 ### Options:
-* `--stringfile` [default: Localizable.strings] - The input POEditor strings file directory.
-* `--swiftfile` [default: Literals.swift] - The output Swift file directory.
+* `--apitoken` - The POEditor API token
+* `--projectid` - The id of the project in POEditor
+* `--projectlanguage` - The language code in POEditor
+* `--onlygenerate` [default: false] -
+* `--swiftfile` [default: Sources/Literals.swift] - The output Swift file directory.
+* `--stringsfile` [default: Sources/Localizable.strings] - The output Strings file directory.
+* `--typename` [default: Literals] - The type name that store all localized vars
+* `--tablename` - The tableName value for NSLocalizedString
+* `--outputformat` [default: Struct] - The output format for swift file (enum or struct)
+* `--keysformat` [default: UpperCamelCase] - The format for the localized key
+
+Run poe help for more info
 
 ## Authors & Collaborators
 
