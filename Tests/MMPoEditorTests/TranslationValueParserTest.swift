@@ -2,7 +2,8 @@ import Foundation
 @testable import MMPoEditor
 import Testing
 
-@Test func testBasicVariables() throws {
+@Test
+func testBasicVariables() throws {
     // Given
     let translationValue = "Hello {{name}}, welcome to {{appName}}!"
     let term = "welcome_message"
@@ -20,7 +21,8 @@ import Testing
     #expect(variables[1].parameterKey == "appName")
 }
 
-@Test func testDuplicateVariables() throws {
+@Test
+func testDuplicateVariables() throws {
     // Given
     let translationValue = "Welcome to {{brandName}} - {{brandName}} is awesome!"
     let term = "duplicate_brand"
@@ -37,7 +39,8 @@ import Testing
     #expect(variables[0].parameterKey == "brandName")
 }
 
-@Test func testMultipleDuplicateVariables() throws {
+@Test
+func testMultipleDuplicateVariables() throws {
     // Given
     let translationValue = "{{var1}} and {{var2}} and {{var1}} and {{var2}} again"
     let term = "multiple_duplicates"
@@ -55,7 +58,8 @@ import Testing
     #expect(variables[1].parameterKey == "var2")
 }
 
-@Test func testVariableOrder() throws {
+@Test
+func testVariableOrder() throws {
     // Given
     let translationValue = "{{var2}} comes before {{var1}} but {{var2}} appears again"
     let term = "variable_order"
@@ -72,7 +76,8 @@ import Testing
     #expect(variables[1].parameterKey == "var1")
 }
 
-@Test func testNumericVariableType() throws {
+@Test
+func testNumericVariableType() throws {
     // Given
     let translationValue = "You have {{number}} items"
     let term = "numeric_variable"
@@ -88,7 +93,8 @@ import Testing
     #expect(variables[0].type == .numeric, "Variable containing 'number' should be treated as numeric")
 }
 
-@Test func testComplexCase() throws {
+@Test
+func testComplexCase() throws {
     // Given
     let translationValue = "{{user}} has {{number}} items in {{user}}'s cart at {{brandName}} and {{brandName}} store"
     let term = "complex_case"
@@ -105,7 +111,8 @@ import Testing
     #expect(variables.map { $0.parameterKey } == ["user", "number", "brandName"])
 }
 
-@Test func testMalformedVariable() throws {
+@Test
+func testMalformedVariable() throws {
     // Given
     let translationValue = "This has a malformed variable {{incomplete"
     let term = "malformed"

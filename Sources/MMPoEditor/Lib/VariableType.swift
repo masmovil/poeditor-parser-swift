@@ -8,8 +8,11 @@ enum VariableType: Equatable {
 extension VariableType {
     var localizedRepresentation: String {
         switch self {
-        case .numeric: return "%d"
-        case .textual: return "%@"
+        case .numeric:
+            return "%d"
+
+        case .textual:
+            return "%@"
         }
     }
 
@@ -31,8 +34,11 @@ extension VariableType {
 extension VariableType {
     private var swiftType: String {
         switch self {
-        case .numeric: return "Int" // TODO: Decimal types?
-        case .textual: return "String"
+        case .numeric:
+            return "Int" // TODO: Decimal types?
+
+        case .textual:
+            return "String"
         }
     }
 

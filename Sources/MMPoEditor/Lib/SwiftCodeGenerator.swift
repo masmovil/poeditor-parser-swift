@@ -23,7 +23,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
         case .struct:
             generatedResult += POEConstants.literalsStructHeader(name: typeName)
             generatedResult += POEConstants.literalsStructStaticTableName(name: tableName)
-            for (_, translation) in translations.enumerated() {
+            for translation in translations {
                 generatedResult += translation.swiftStaticFuncCode
                 generatedResult += POEConstants.methodOrVariableSeparator
             }
@@ -39,7 +39,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
             generatedResult += POEConstants.methodOrVariableSeparator
 
             generatedResult += POEConstants.literalsEnumValueFuncStart
-            for (_, translation) in translations.enumerated() {
+            for translation in translations {
                 generatedResult += translation.swiftEnumCaseForValue
                 generatedResult += POEConstants.methodOrVariableSeparator
             }
@@ -51,7 +51,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
             generatedResult += POEConstants.methodOrVariableSeparator
 
             generatedResult += POEConstants.literalsEnumStringKeyStart
-            for (_, translation) in translations.enumerated() {
+            for translation in translations {
                 generatedResult += translation.swiftEnumCaseForKey
                 generatedResult += POEConstants.methodOrVariableSeparator
             }
@@ -103,7 +103,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
             fileHandle += POEConstants.methodOrVariableSeparator
 
             fileHandle += POEConstants.literalsEnumValueFuncStart
-            for (_, translation) in translations.enumerated() {
+            for translation in translations {
                 fileHandle += translation.swiftEnumCaseForValue
                 fileHandle += POEConstants.methodOrVariableSeparator
             }
@@ -115,7 +115,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
             fileHandle += POEConstants.methodOrVariableSeparator
 
             fileHandle += POEConstants.literalsEnumStringKeyStart
-            for (_, translation) in translations.enumerated() {
+            for translation in translations {
                 fileHandle += translation.swiftEnumCaseForKey
                 fileHandle += POEConstants.methodOrVariableSeparator
             }

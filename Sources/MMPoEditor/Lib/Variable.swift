@@ -34,7 +34,7 @@ struct Variable: Equatable {
         self.type = VariableType(string: rawKey)
     }
 
-    static func ==(lhs: Variable, rhs: Variable) -> Bool {
+    static func == (lhs: Variable, rhs: Variable) -> Bool {
         lhs.type == rhs.type && lhs.rawKey == rhs.rawKey
     }
 }

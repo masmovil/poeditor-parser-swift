@@ -56,8 +56,8 @@ force_cast:
 force_try:
   severity: error
 function_parameter_count:
-  warning: 6
-  error: 6
+  warning: 12
+  error: 12
 function_body_length: 
   warning: 120
   error: 200

@@ -27,7 +27,11 @@ enum POEConstants {
     static let literalsEnumValueFuncStart = "\tpublic func parsed(value: String) -> String {\n\t\tswitch(self) {\n"
     static let literalsEnumValueFuncEnd = "\t\t}\n\t}\n"
     static let literalsEnumFooter = "}\n"
-    static let literalsEnumDefaultCase = "\n\t\t// Add unneeded default to avoid error: `The compiler is unable to check that this switch is exhaustive in reasonable time`\n\t\t// Sorry for the warning, you may consider to use Struct type instead\n\t\tdefault: fatalError()\n"
+    static let literalsEnumDefaultCase = """
+        // Add unneeded default to avoid error: `The compiler is unable to check that this switch is exhaustive in reasonable time`
+        // Sorry for the warning, you may consider to use Struct type instead
+        default: fatalError()
+        """
 
     static let fileFooter = "\n//swiftlint:enable all\n"
 
