@@ -12,7 +12,7 @@ POEditor-Parser is available through [Mint](https://github.com/yonaskolb/Mint)
 
 To install it, simply add the following line to your `Mintfile`:
 ```ruby
-masmovil/poeditor-parser-swift@v2.0.1
+masmovil/poeditor-parser-swift@v2.0.2
 ```
 
 ## Usage

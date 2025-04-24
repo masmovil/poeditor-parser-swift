@@ -1,7 +1,11 @@
+import Commander
 import Foundation
+import Rainbow
 
-class Program {
-    func run(token: String?,
+public class Program {
+    public init() {}
+    
+    public func run(token: String?,
              id: Int?,
              language: String?,
              onlyGenerate: Bool,

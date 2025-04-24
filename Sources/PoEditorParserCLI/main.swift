@@ -1,8 +1,7 @@
-import Foundation
 import Commander
+import Foundation
+import PoEditorParser
 import Rainbow
-
-let POEditorAPIURL = "https://api.poeditor.com/v2"
 
 command(
     Option<String?>("apitoken", default: nil, description: "The POEditor API token"),
