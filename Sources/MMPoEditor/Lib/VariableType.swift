@@ -1,6 +1,6 @@
 import Foundation
 
-enum VariableType {
+enum VariableType: Equatable {
     case numeric
     case textual
 }

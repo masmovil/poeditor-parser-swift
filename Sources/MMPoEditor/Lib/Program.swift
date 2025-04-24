@@ -1,16 +1,24 @@
 import Foundation
+import Commander
+import Rainbow
 
-class Program {
-    func run(token: String?,
-             id: Int?,
-             language: String?,
-             onlyGenerate: Bool,
-             swiftFile: String,
-             stringsFile: String,
-             typeName: String,
-             tableName: String?,
-             outputFormat: OutputFormat,
-             keysFormat: KeysFormat) throws {
+public class Program {
+    
+    public init() {}
+    
+    public func run(
+        token: String?,
+        id: Int?,
+        language: String?,
+        onlyGenerate: Bool,
+        swiftFile: String,
+        stringsFile: String,
+        typeName: String,
+        tableName: String?,
+        outputFormat: OutputFormat,
+        keysFormat: KeysFormat,
+        poEditorApiUrl: String
+    ) throws {
         do {
             print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
             print("-  Only Generate: \(onlyGenerate)".white)
@@ -29,7 +37,7 @@ class Program {
                 guard let language else { throw AppError.missingOptionProjectLanguage }
                 print("ℹ️ Fetching contents of strings at POEditor...".blue)
                 print("🔄 Querying POEditor for the latest strings file...".magenta)
-                var request = URLRequest(url: URL(string: "\(POEditorAPIURL)/projects/export")!)
+                var request = URLRequest(url: URL(string: "\(poEditorApiUrl)/projects/export")!)
                 request.httpMethod = "POST"
                 let parameters = ""
                 + "api_token=\(token)&"

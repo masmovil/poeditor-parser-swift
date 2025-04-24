@@ -1,6 +1,7 @@
 import Foundation
 import Commander
 import Rainbow
+import MMPoEditor
 
 let POEditorAPIURL = "https://api.poeditor.com/v2"
 
@@ -27,15 +28,18 @@ command(
      keysFormat: KeysFormat) in
 
     let program = Program()
-    try program.run(token: token,
-                    id: id,
-                    language: language,
-                    onlyGenerate: onlyGenerate,
-                    swiftFile: swiftFile,
-                    stringsFile: stringsFile,
-                    typeName: typeName, 
-                    tableName: tableName,
-                    outputFormat: outputFormat,
-                    keysFormat: keysFormat)
+    try program.run(
+        token: token,
+        id: id,
+        language: language,
+        onlyGenerate: onlyGenerate,
+        swiftFile: swiftFile,
+        stringsFile: stringsFile,
+        typeName: typeName,
+        tableName: tableName,
+        outputFormat: outputFormat,
+        keysFormat: keysFormat,
+        poEditorApiUrl: POEditorAPIURL
+    )
 
 }.run()

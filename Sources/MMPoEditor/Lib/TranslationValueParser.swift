@@ -43,12 +43,6 @@ enum TranslationValueParser {
             var intOut: Int32 = 0
             let intScanned = str.scanInt32(&intOut)
 
-            if intScanned {
-                // ordered var
-            } else {
-                // unordered var
-            }
-
             if str.isAtEnd {
                 throw AppError.misspelledTerm(term: term, translation: translationValue)
             }
@@ -59,8 +53,12 @@ enum TranslationValueParser {
 
             // AssociateOrder if ordered
             let variable = Variable(rawKey: variableName! as String)
+            
             localizedString += "{{" + variable.parameterKey + "}}"
-            variables.append((order: Int(intOut), variable: variable))
+            
+            if !variables.contains(where: { $0.variable == variable }) {
+                variables.append((order: Int(intOut), variable: variable))
+            }
 
             if str.scanLocation + 2 > translationValue.count {
                 throw AppError.misspelledTerm(term: term, translation: translationValue)

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Variable {
+struct Variable: Equatable {
     let type: VariableType
     let rawKey: String
 
@@ -32,5 +32,9 @@ struct Variable {
     init(rawKey: String) {
         self.rawKey = rawKey
         self.type = VariableType(string: rawKey)
+    }
+    
+    static func ==(lhs: Variable, rhs: Variable) -> Bool {
+        lhs.type == rhs.type && lhs.rawKey == rhs.rawKey
     }
 }
