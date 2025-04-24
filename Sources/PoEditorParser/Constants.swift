@@ -1,5 +1,7 @@
 import Foundation
 
+let POEditorAPIURL = "https://api.poeditor.com/v2"
+
 enum POEConstants {
     static let fileHeader = """
     // Generated using MM-POEditorParser (\(version))
@@ -11,7 +13,7 @@ enum POEConstants {
 
     """
 
-    static let version = "2.0.1"
+    static let version = "2.0.2"
 
     static func literalsStructHeader(name: String) -> String { "public struct \(name) {\n" }
     static func literalsStructStaticTableName(name: String?) -> String {
