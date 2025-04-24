@@ -1,16 +1,20 @@
+import Commander
 import Foundation
+import Rainbow
 
-class Program {
-    func run(token: String?,
-             id: Int?,
-             language: String?,
-             onlyGenerate: Bool,
-             swiftFile: String,
-             stringsFile: String,
-             typeName: String,
-             tableName: String?,
-             outputFormat: OutputFormat,
-             keysFormat: KeysFormat) throws {
+public class Program {
+    public init() {}
+
+    public func run(token: String?,
+                    id: Int?,
+                    language: String?,
+                    onlyGenerate: Bool,
+                    swiftFile: String,
+                    stringsFile: String,
+                    typeName: String,
+                    tableName: String?,
+                    outputFormat: OutputFormat,
+                    keysFormat: KeysFormat) throws {
         do {
             print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
             print("-  Only Generate: \(onlyGenerate)".white)
@@ -20,9 +24,9 @@ class Program {
             print("-  Table name: \(tableName ?? "NOT SET")".white)
             print("-  Output format: \(outputFormat)".white)
             print("-  Keys format: \(keysFormat)".white)
-            
+
             let translationStringContent: String
-            
+
             if !onlyGenerate {
                 guard let token else { throw AppError.missingOptionApiToken }
                 guard let id else { throw AppError.missingOptionProjectId }
@@ -32,10 +36,10 @@ class Program {
                 var request = URLRequest(url: URL(string: "\(POEditorAPIURL)/projects/export")!)
                 request.httpMethod = "POST"
                 let parameters = ""
-                + "api_token=\(token)&"
-                + "id=\(id)&"
-                + "language=\(language)&"
-                + "type=apple_strings"
+                    + "api_token=\(token)&"
+                    + "id=\(id)&"
+                    + "language=\(language)&"
+                    + "type=apple_strings"
                 request.httpBody = parameters.data(using: .utf8)
                 let data = try URLSession.shared.syncDataTask(with: request)
                 guard
@@ -47,7 +51,7 @@ class Program {
                     throw AppError.apiConnectError
                 }
                 print("✅ Successfully got the latest URL for the strings file from POEditor".green)
-                
+
                 print("🔄 Downloading the latest strings file from POEditor...".magenta)
                 print("URL: \(urlString)".lightWhite)
                 let downloadRequest = URLRequest(url: url)
@@ -94,7 +98,6 @@ class Program {
             let stringsFileGenerator = StringsFileGenerator(fileHandle: stringsHandle)
             stringsFileGenerator.generateCode(translations: translations)
             print("✅ Success! Strings generated at \(stringsFile)".green)
-
         } catch let error {
             print("❌ [ERROR] \(error.localizedDescription)".red)
             throw error

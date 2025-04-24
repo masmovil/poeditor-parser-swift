@@ -1,14 +1,15 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "MM-PoEditor-Parser",
+    name: "PoEditorParser",
+    platforms: [.iOS(.v16)],
     products: [
         .executable(
             name: "poe",
-            targets: ["MM-PoEditor-Parser"]
+            targets: ["PoEditorParserCLI"]
         )
     ],
     dependencies: [
@@ -16,9 +17,23 @@ let package = Package(
         .package(url: "https://github.com/onevcat/Rainbow", .upToNextMajor(from: "3.1.5")),
     ],
     targets: [
-        .executableTarget(
-            name: "MM-PoEditor-Parser",
+        .target(
+            name: "PoEditorParser",
             dependencies: ["Commander", "Rainbow"]
         ),
+        .executableTarget(
+            name: "PoEditorParserCLI",
+            dependencies: [
+                "Commander",
+                "Rainbow",
+                .target(name: "PoEditorParser"),
+            ]
+        ),
+        .testTarget(
+            name: "PoEditorParserTests",
+            dependencies: [
+                .target(name: "PoEditorParser"),
+            ]
+        )
     ]
 )

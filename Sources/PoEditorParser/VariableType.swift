@@ -1,6 +1,6 @@
 import Foundation
 
-enum VariableType {
+enum VariableType: Equatable {
     case numeric
     case textual
 }
@@ -8,8 +8,11 @@ enum VariableType {
 extension VariableType {
     var localizedRepresentation: String {
         switch self {
-        case .numeric: return "%d"
-        case .textual: return "%@"
+        case .numeric:
+            return "%d"
+
+        case .textual:
+            return "%@"
         }
     }
 
@@ -31,16 +34,19 @@ extension VariableType {
 extension VariableType {
     private var swiftType: String {
         switch self {
-        case .numeric: return "Int" // TODO: Decimal types?
-        case .textual: return "String"
+        case .numeric:
+            return "Int" // TODO: Decimal types?
+
+        case .textual:
+            return "String"
         }
     }
 
     func swiftParameter(key: String) -> String {
-        return key.snakeCased() + ": " + swiftType
+        key.snakeCased() + ": " + swiftType
     }
 
     func swiftCaseParameter(key: String) -> String {
-        return "let \(key.snakeCased())"
+        "let \(key.snakeCased())"
     }
 }

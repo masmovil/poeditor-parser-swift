@@ -17,5 +17,6 @@ end
 
 task :package do
   sh("xcrun swift build -c release --arch arm64 --arch x86_64")
+  sh("mkdir -p bin")
   sh("cp ./.build/apple/Products/Release/poe ./bin/")
 end

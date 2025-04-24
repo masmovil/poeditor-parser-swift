@@ -1,5 +1,5 @@
-import Foundation
 import Commander
+import Foundation
 
 public enum OutputFormat: String, ArgumentConvertible {
     case `enum`
@@ -26,5 +26,4 @@ public enum OutputFormat: String, ArgumentConvertible {
             return "Struct"
         }
     }
-
 }
