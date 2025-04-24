@@ -1,7 +1,5 @@
 import Foundation
 
-let POEditorAPIURL = "https://api.poeditor.com/v2"
-
 enum POEConstants {
     static let fileHeader = """
     // Generated using MM-POEditorParser (\(version))

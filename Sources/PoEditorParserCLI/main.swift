@@ -3,6 +3,8 @@ import Foundation
 import PoEditorParser
 import Rainbow
 
+let POEditorAPIURL = "https://api.poeditor.com/v2"
+
 private func processingClosure(
     token: String?,
     id: Int?,
@@ -26,7 +28,8 @@ private func processingClosure(
         typeName: typeName,
         tableName: tableName,
         outputFormat: outputFormat,
-        keysFormat: keysFormat
+        keysFormat: keysFormat,
+        poEditorApiUrl: POEditorAPIURL
     )
 }
 
