@@ -1,5 +1,5 @@
-import Foundation
 import Commander
+import Foundation
 
 public enum KeysFormat: String, ArgumentConvertible {
     case lowerCamelCase

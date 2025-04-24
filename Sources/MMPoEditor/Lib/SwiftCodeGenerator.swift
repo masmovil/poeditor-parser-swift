@@ -43,7 +43,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
                 generatedResult += translation.swiftEnumCaseForValue
                 generatedResult += POEConstants.methodOrVariableSeparator
             }
-            if translations.count > 1000 {
+            if translations.count > 1_000 {
                 generatedResult += POEConstants.literalsEnumDefaultCase
             }
             generatedResult += POEConstants.literalsEnumValueFuncEnd
@@ -55,7 +55,7 @@ public class StringCodeGenerator: SwiftCodeGenerator {
                 generatedResult += translation.swiftEnumCaseForKey
                 generatedResult += POEConstants.methodOrVariableSeparator
             }
-            if translations.count > 1000 {
+            if translations.count > 1_000 {
                 generatedResult += POEConstants.literalsEnumDefaultCase
             }
             generatedResult += POEConstants.literalsEnumStringKeyEnd
@@ -107,7 +107,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
                 fileHandle += translation.swiftEnumCaseForValue
                 fileHandle += POEConstants.methodOrVariableSeparator
             }
-            if translations.count > 1000 {
+            if translations.count > 1_000 {
                 fileHandle += POEConstants.literalsEnumDefaultCase
             }
             fileHandle += POEConstants.literalsEnumValueFuncEnd
@@ -119,7 +119,7 @@ public class FileCodeGenerator: SwiftCodeGenerator {
                 fileHandle += translation.swiftEnumCaseForKey
                 fileHandle += POEConstants.methodOrVariableSeparator
             }
-            if translations.count > 1000 {
+            if translations.count > 1_000 {
                 fileHandle += POEConstants.literalsEnumDefaultCase
             }
             fileHandle += POEConstants.literalsEnumStringKeyEnd

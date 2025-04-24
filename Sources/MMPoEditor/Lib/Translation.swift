@@ -54,7 +54,7 @@ public struct Translation: Comparable {
     }
 
     public var swiftEnumCaseForKey: String {
-        return "\t\tcase .\(prettyKey): return \"\(key)\""
+        "\t\tcase .\(prettyKey): return \"\(key)\""
     }
 
     private var prettyKey: String {
@@ -69,7 +69,7 @@ public struct Translation: Comparable {
     }
 
     private func generateEnumCaseWithoutVariables() -> String {
-        return "\t\tcase .\(prettyKey): return value"
+        "\t\tcase .\(prettyKey): return value"
     }
 
     private func generateEnumCaseWithVariables() -> String {
@@ -95,7 +95,7 @@ public struct Translation: Comparable {
          return NSLocalizedString()
          }
          */
-        return "\tpublic static var \(prettyKey): String {\n\t\treturn NSLocalizedString(\"\(key)\", tableName: \(typeName).tableName, comment: \"\")\n\t}\n"
+        "\tpublic static var \(prettyKey): String {\n\t\treturn NSLocalizedString(\"\(key)\", tableName: \(typeName).tableName, comment: \"\")\n\t}\n"
     }
 
     private func generateFuncWithVariables() -> String {

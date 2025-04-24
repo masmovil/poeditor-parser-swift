@@ -1,5 +1,5 @@
-import Foundation
 import Commander
+import Foundation
 
 extension Bool: ArgumentConvertible {
     public init(parser: ArgumentParser) throws {
@@ -67,15 +67,15 @@ extension String {
     }
 
     var first: String {
-        return String(prefix(1))
+        String(prefix(1))
     }
 
     var lowercaseFirst: String {
-        return first.lowercased() + String(dropFirst())
+        first.lowercased() + String(dropFirst())
     }
 
     mutating func snakeCase() -> String {
-        return self
+        self
             .split(separator: "_")  // split to components
             .map(String.init)   // convert subsequences to String
             .enumerated()  // get indices
@@ -84,7 +84,7 @@ extension String {
     }
 
     func snakeCased() -> String {
-        return self
+        self
             .split(separator: "_")  // split to components
             .map(String.init)   // convert subsequences to String
             .enumerated()  // get indices

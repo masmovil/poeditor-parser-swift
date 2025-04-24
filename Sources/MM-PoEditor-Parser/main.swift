@@ -1,7 +1,7 @@
-import Foundation
 import Commander
-import Rainbow
+import Foundation
 import MMPoEditor
+import Rainbow
 
 let POEditorAPIURL = "https://api.poeditor.com/v2"
 
@@ -41,5 +41,4 @@ command(
         keysFormat: keysFormat,
         poEditorApiUrl: POEditorAPIURL
     )
-
 }.run()
