@@ -1,20 +1,18 @@
+# frozen_string_literal: true
+
 task default: %w[setup]
 
 task(:setup) do
-  raise '`brew` is required. Please install brew. https://brew.sh/' unless system('which brew')
+  puts('➡️  Mint 🍃')
+  sh('mint bootstrap')  
+end
 
-  puts('➡️  Bundle')
-  sh('brew bundle')
-  sh('bundle install')
+task(:lint) do
+  sh('mint run swiftlint --fix --format')
+end
 
-  puts('➡️  Overcommit')
-  sh('bundle exec overcommit --install')
-  sh('bundle exec overcommit --sign')
-  sh('bundle exec overcommit --sign pre-commit')
-  sh('bundle exec overcommit --sign pre-push')
-
-  puts('➡️  SPM Resolve Dependencies')
-  sh('xcodebuild -resolvePackageDependencies')
+task(:test) do
+  sh('swift test --enable-code-coverage --disable-swift-testing')
 end
 
 task :package do
