@@ -1,5 +1,5 @@
 import Foundation
-@testable import MMPoEditor
+@testable import PoEditorParser
 import Testing
 
 @Test

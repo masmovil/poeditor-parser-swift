@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "MM-PoEditor-Parser",
+    name: "PoEditorParser2",
     platforms: [.iOS(.v16)],
     products: [
         .executable(
             name: "poe",
-            targets: ["MM-PoEditor-Parser"]
+            targets: ["PoEditorParserCLI"]
         )
     ],
     dependencies: [
@@ -19,21 +19,21 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "MMPoEditor",
+            name: "PoEditorParser",
             dependencies: ["Commander", "Rainbow"]
         ),
         .executableTarget(
-            name: "MM-PoEditor-Parser",
+            name: "PoEditorParserCLI",
             dependencies: [
                 "Commander",
                 "Rainbow",
-                .target(name: "MMPoEditor"),
+                .target(name: "PoEditorParser"),
             ]
         ),
         .testTarget(
-            name: "MMPoEditorTests",
+            name: "PoEditorParserTests",
             dependencies: [
-                .target(name: "MMPoEditor"),
+                .target(name: "PoEditorParser"),
                 .product(name: "Testing", package: "swift-testing")
             ]
         )
