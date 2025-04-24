@@ -1,7 +1,7 @@
 import Commander
 import Foundation
 
-extension Bool: ArgumentConvertible {
+extension Bool: @retroactive ArgumentConvertible {
     public init(parser: ArgumentParser) throws {
         guard let value = parser.shift() else {
             throw ArgumentError.missingValue(argument: nil)

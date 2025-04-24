@@ -5,16 +5,18 @@ import Rainbow
 public class Program {
     public init() {}
 
-    public func run(token: String?,
-                    id: Int?,
-                    language: String?,
-                    onlyGenerate: Bool,
-                    swiftFile: String,
-                    stringsFile: String,
-                    typeName: String,
-                    tableName: String?,
-                    outputFormat: OutputFormat,
-                    keysFormat: KeysFormat) throws {
+    public func run(
+        token: String?,
+        id: Int?,
+        language: String?,
+        onlyGenerate: Bool,
+        swiftFile: String,
+        stringsFile: String,
+        typeName: String,
+        tableName: String?,
+        outputFormat: OutputFormat,
+        keysFormat: KeysFormat
+    ) throws {
         do {
             print("🚀  Starting PoEditor Parser v\(POEConstants.version)".blue)
             print("-  Only Generate: \(onlyGenerate)".white)
