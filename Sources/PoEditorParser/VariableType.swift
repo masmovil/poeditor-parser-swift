@@ -37,10 +37,10 @@ extension VariableType {
     }
 
     func swiftParameter(key: String) -> String {
-        return key.snakeCased() + ": " + swiftType
+        key.snakeCased() + ": " + swiftType
     }
 
     func swiftCaseParameter(key: String) -> String {
-        return "let \(key.snakeCased())"
+        "let \(key.snakeCased())"
     }
 }

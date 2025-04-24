@@ -32,9 +32,8 @@ command(
                     onlyGenerate: onlyGenerate,
                     swiftFile: swiftFile,
                     stringsFile: stringsFile,
-                    typeName: typeName, 
+                    typeName: typeName,
                     tableName: tableName,
                     outputFormat: outputFormat,
                     keysFormat: keysFormat)
-
 }.run()

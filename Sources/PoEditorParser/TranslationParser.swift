@@ -5,7 +5,6 @@ protocol TranslationParser {
 }
 
 public class StringTranslationParser: TranslationParser {
-
     let typeName: String
     let translation: String
     let keysFormat: KeysFormat
@@ -58,7 +57,6 @@ public class StringTranslationParser: TranslationParser {
                                                     key: key! as String,
                                                     rawValue: finalValue as String? ?? "",
                                                     keysFormat: keysFormat))
-
             }
             if str.isAtEnd {
                 break

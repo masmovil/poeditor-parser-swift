@@ -1,7 +1,6 @@
 import Foundation
 
 class StreamReader {
-
     let encoding: String.Encoding
     let chunkSize: Int
 
@@ -15,7 +14,7 @@ class StreamReader {
         self.encoding = encoding
 
         if let fileHandle = FileHandle(forReadingAtPath: path),
-            let delimData = delimiter.data(using: encoding) {
+           let delimData = delimiter.data(using: encoding) {
             self.fileHandle = fileHandle
             self.delimData = delimData
             self.buffer = Data(capacity: chunkSize)
