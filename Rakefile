@@ -12,7 +12,7 @@ task(:lint) do
 end
 
 task(:test) do
-  sh('swift test --enable-code-coverage --disable-swift-testing')
+  sh('swift test --enable-code-coverage')
 end
 
 task :package do

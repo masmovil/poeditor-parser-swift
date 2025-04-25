@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "PoEditorParser",
-    platforms: [.iOS(.v16)],
     products: [
         .executable(
             name: "poe",
