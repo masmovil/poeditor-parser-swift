@@ -41,7 +41,7 @@ enum TranslationValueParser {
             str.scanLocation += 1
 
             var intOut: Int32 = 0
-            let intScanned = str.scanInt32(&intOut)
+            _ = str.scanInt32(&intOut)
 
             if str.isAtEnd {
                 throw AppError.misspelledTerm(term: term, translation: translationValue)

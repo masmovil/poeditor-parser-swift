@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "PoEditorParser",
-    platforms: [.iOS(.v16)],
     products: [
         .executable(
             name: "poe",
@@ -15,7 +14,6 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/kylef/Commander", .upToNextMajor(from: "0.9.1")),
         .package(url: "https://github.com/onevcat/Rainbow", .upToNextMajor(from: "3.1.5")),
-        .package(url: "https://github.com/apple/swift-testing.git", from: "0.99.0")
     ],
     targets: [
         .target(
@@ -34,7 +32,6 @@ let package = Package(
             name: "PoEditorParserTests",
             dependencies: [
                 .target(name: "PoEditorParser"),
-                .product(name: "Testing", package: "swift-testing")
             ]
         )
     ]
