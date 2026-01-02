@@ -93,7 +93,8 @@ public struct Translation: Comparable {
         /*
          static let key: StringsUIKey = StringsUIKey(key: "key_id")
          */
-        "\tstatic let \(prettyKey): \(typeName) = \(typeName)(key: \"\(key)\")"
+        let comment = truncatedComment(from: rawValue, maxLength: 70)
+        return "\t/// \(comment)\n\tstatic let \(prettyKey): \(typeName) = \(typeName)(key: \"\(key)\")"
     }
 
     private func generateFuncWithVariables() -> String {
@@ -122,7 +123,9 @@ public struct Translation: Comparable {
             return "[\(result.joined(separator: ", "))]"
         }
         
+        let comment = truncatedComment(from: rawValue, maxLength: 70)
         return """
+            \t/// \(comment)
             static func \(prettyKey)(\(parameters)) -> \(typeName) {
                 .init(key: \"\(key)\", parameters: \(localizedArgumentsString))
             }
@@ -135,6 +138,15 @@ public struct Translation: Comparable {
 
     public static func == (lhs: Translation, rhs: Translation) -> Bool {
         lhs.prettyKey == rhs.prettyKey
+    }
+
+    private func truncatedComment(from text: String, maxLength: Int) -> String {
+        let cleanText = text.replacingOccurrences(of: "{{", with: "").replacingOccurrences(of: "}}", with: "")
+        if cleanText.count <= maxLength {
+            return cleanText
+        }
+        let truncated = String(cleanText.prefix(maxLength - 3))
+        return "\(truncated)..."
     }
 }
 
