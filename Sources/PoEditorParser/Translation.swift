@@ -93,28 +93,30 @@ public struct Translation: Comparable {
         /*
          static let key: StringsUIKey = StringsUIKey(key: "key_id")
          */
-        let comment = truncatedComment(from: rawValue, maxLength: 70)
-        return "\t/// \(comment)\n\tstatic let \(prettyKey): \(typeName) = \(typeName)(key: \"\(key)\")"
+        """
+        \(commentKey(maxLength: 70))
+            static let \(prettyKey): \(typeName) = \(typeName)(key: \"\(key)\")
+        """
     }
 
     private func generateFuncWithVariables() -> String {
         /*
          static func key(parameter1: String) -> StringsUIKey {
-            .init(key: "key", parameters: ["parameter1": parameter1])
+         .init(key: "key", parameters: ["parameter1": parameter1])
          }
          */
         let parameters = variables
             .map { $0.type.swiftParameter(key: $0.parameterKey) }
             .joined(separator: ", ")
-        
+
         let localizedArguments = variables
             .map { variable in
                 (
                     key: "\"\(variable.parameterKey)\"",
-                    value: variable.toParamterValue()
+                    value: variable.toParameterValue()
                 )
             }
-            
+
         var localizedArgumentsString: String {
             var result: [String] = []
             for (key, value) in localizedArguments {
@@ -122,10 +124,9 @@ public struct Translation: Comparable {
             }
             return "[\(result.joined(separator: ", "))]"
         }
-        
-        let comment = truncatedComment(from: rawValue, maxLength: 70)
+
         return """
-            \t/// \(comment)
+        \(commentKey(maxLength: 70))
             static func \(prettyKey)(\(parameters)) -> \(typeName) {
                 .init(key: \"\(key)\", parameters: \(localizedArgumentsString))
             }
@@ -140,21 +141,40 @@ public struct Translation: Comparable {
         lhs.prettyKey == rhs.prettyKey
     }
 
-    private func truncatedComment(from text: String, maxLength: Int) -> String {
-        let cleanText = text.replacingOccurrences(of: "{{", with: "").replacingOccurrences(of: "}}", with: "")
-        if cleanText.count <= maxLength {
-            return cleanText
+    private func commentKey(maxLength: Int) -> String {
+        let keyValue: String = {
+            if rawValue.count <= maxLength {
+                return rawValue
+            }
+            let truncated = String(rawValue.prefix(maxLength - 3))
+            return "\(truncated)..."
+        }()
+
+        if variables.isEmpty {
+            return """
+                /// Returns Literal instance for `\(key)` key.
+                /// - Example: \(keyValue)
+            """
+        } else {
+            let parameters = variables
+                .map { "    ///     - \($0.parameterKey): Replace *{{\($0.parameterKey)}}* with the given value in \($0.type.swiftType)" }
+                .joined(separator: "\n")
+            return """
+                /// Returns Literal instance for `\(key)` key.
+                /// - Parameters:
+            \(parameters)
+                /// - Example: \(keyValue)
+            """
         }
-        let truncated = String(cleanText.prefix(maxLength - 3))
-        return "\(truncated)..."
     }
 }
 
 private extension Variable {
-    func toParamterValue() -> String {
+    func toParameterValue() -> String {
         switch type {
         case .textual:
             return parameterKey.snakeCased()
+
         case .numeric:
             let value = "String(format: \"\(type.localizedRepresentation)\", \(parameterKey.snakeCased()))"
             return value

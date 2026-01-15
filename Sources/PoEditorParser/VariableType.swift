@@ -32,7 +32,7 @@ extension VariableType {
 }
 
 extension VariableType {
-    private var swiftType: String {
+    var swiftType: String {
         switch self {
         case .numeric:
             return "Int" // TODO: Decimal types?
