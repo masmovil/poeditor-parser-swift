@@ -36,13 +36,13 @@ public struct Translation: Comparable {
 
     public var swiftEnumCaseCode: String {
         if variables.isEmpty {
-            return "\tcase \(prettyKey)"
+            return "\tcase \(keySafeForCodeMethod)"
         }
         let parameters = variables
             .map { $0.type.swiftParameter(key: $0.parameterKey) }
             .joined(separator: ", ")
 
-        return "\tcase \(prettyKey)(\(parameters))"
+        return "\tcase \(keySafeForCodeMethod)(\(parameters))"
     }
 
     public var swiftEnumCaseForValue: String {
@@ -54,22 +54,29 @@ public struct Translation: Comparable {
     }
 
     public var swiftEnumCaseForKey: String {
-        "\t\tcase .\(prettyKey): return \"\(key)\""
+        "\t\tcase .\(keySafeForCodeMethod): return \"\(key)\""
     }
 
-    private var prettyKey: String {
+    private var keySafeForCodeMethod: String {        
         switch keysFormat {
         case .upperCamelCase:
-            return key.capitalized.replacingOccurrences(of: "_", with: "")
+            return key.capitalized
+                .replacingOccurrences(of: "_", with: "")
+                .replacingOccurrences(of: "[", with: "")
+                .replacingOccurrences(of: "]", with: "")
+                .replacingOccurrences(of: "|", with: "")
 
         case .lowerCamelCase:
             return (key.prefix(1).lowercased() + key.capitalized.dropFirst())
                 .replacingOccurrences(of: "_", with: "")
+                .replacingOccurrences(of: "[", with: "")
+                .replacingOccurrences(of: "]", with: "")
+                .replacingOccurrences(of: "|", with: "")
         }
     }
 
     private func generateEnumCaseWithoutVariables() -> String {
-        "\t\tcase .\(prettyKey): return value"
+        "\t\tcase .\(keySafeForCodeMethod): return value"
     }
 
     private func generateEnumCaseWithVariables() -> String {
@@ -86,7 +93,7 @@ public struct Translation: Comparable {
                 return ".replacingOccurrences(of: \"{{\(variable.parameterKey)}}\", with: \(variable.parameterKey.snakeCased()))"
             }
             .joined(separator: "\n\t\t\t")
-        return "\t\tcase .\(prettyKey)(\(parameters)): return value\n\t\t\t\(localizedArguments)"
+        return "\t\tcase .\(keySafeForCodeMethod)(\(parameters)): return value\n\t\t\t\(localizedArguments)"
     }
 
     private func generateFuncWithoutVariables() -> String {
@@ -94,8 +101,8 @@ public struct Translation: Comparable {
          static let key: StringsUIKey = StringsUIKey(key: "key_id")
          */
         """
-        \(commentKey(maxLength: 70))
-            static let \(prettyKey): \(typeName) = \(typeName)(key: \"\(key)\")
+        \(commentKey(maxLength: 700))
+            static let \(keySafeForCodeMethod): \(typeName) = \(typeName)(key: \"\(key)\")
         """
     }
 
@@ -126,34 +133,34 @@ public struct Translation: Comparable {
         }
 
         return """
-        \(commentKey(maxLength: 70))
-            static func \(prettyKey)(\(parameters)) -> \(typeName) {
+        \(commentKey(maxLength: 700))
+            static func \(keySafeForCodeMethod)(\(parameters)) -> \(typeName) {
                 .init(key: \"\(key)\", parameters: \(localizedArgumentsString))
             }
         """
     }
 
     public static func < (lhs: Translation, rhs: Translation) -> Bool {
-        lhs.prettyKey < rhs.prettyKey
+        lhs.keySafeForCodeMethod < rhs.keySafeForCodeMethod
     }
 
     public static func == (lhs: Translation, rhs: Translation) -> Bool {
-        lhs.prettyKey == rhs.prettyKey
+        lhs.keySafeForCodeMethod == rhs.keySafeForCodeMethod
     }
 
     private func commentKey(maxLength: Int) -> String {
-        let keyValue: String = {
-            if rawValue.count <= maxLength {
-                return rawValue
+        let truncatedValue: String = {
+            if value.count <= maxLength {
+                return value
             }
-            let truncated = String(rawValue.prefix(maxLength - 3))
+            let truncated = String(value.prefix(maxLength - 3))
             return "\(truncated)..."
         }()
 
         if variables.isEmpty {
             return """
                 /// Returns Literal instance for `\(key)` key.
-                /// - Example: \(keyValue)
+                /// - Example: \(truncatedValue)
             """
         } else {
             let parameters = variables
@@ -163,7 +170,7 @@ public struct Translation: Comparable {
                 /// Returns Literal instance for `\(key)` key.
                 /// - Parameters:
             \(parameters)
-                /// - Example: \(keyValue)
+                /// - Example: \(truncatedValue)
             """
         }
     }
