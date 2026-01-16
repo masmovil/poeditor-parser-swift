@@ -57,7 +57,7 @@ public struct Translation: Comparable {
         "\t\tcase .\(keySafeForCodeMethod): return \"\(key)\""
     }
 
-    private var keySafeForCodeMethod: String {        
+    private var keySafeForCodeMethod: String {
         switch keysFormat {
         case .upperCamelCase:
             return key.capitalized
